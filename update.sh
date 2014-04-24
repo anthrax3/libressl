@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # resync this library with the upstream project
 git submodule init
@@ -6,6 +6,7 @@ git submodule update
 
 copy_src() {
 	mkdir -p $1
+	rm -f $1/*.c
 	for file in $2; do
 		cp libssl-openbsd/src/$1/$file $1
 	done
@@ -132,7 +133,7 @@ copy_crypt ecdsa "ecs_lib.c ecs_asn1.c ecs_ossl.c ecs_sign.c ecs_vrf.c
 copy_crypt engine "eng_err.c eng_lib.c eng_list.c eng_init.c eng_ctrl.c
 	eng_table.c eng_pkey.c eng_fat.c eng_all.c tb_rsa.c tb_dsa.c tb_ecdsa.c
 	tb_dh.c tb_ecdh.c tb_rand.c tb_store.c tb_cipher.c tb_digest.c tb_pkmeth.c
-	tb_asnmth.c eng_openssl.c eng_cnf.c eng_dyn.c hw_cryptodev.c eng_rsax.c
+	tb_asnmth.c eng_openssl.c eng_cnf.c eng_dyn.c eng_rsax.c
 	eng_rdrand.c eng_int.h eng_padlock.c"
 
 copy_crypt err "err.c err_all.c err_prn.c"

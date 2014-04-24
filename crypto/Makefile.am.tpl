@@ -23,3 +23,5 @@ libcrypto_la_SOURCES += compat/reallocarray.c
 endif
 libcrypto_la_SOURCES += compat/arc4random.c
 libcrypto_la_SOURCES += compat/explicit_bzero.c
+# disable cryptodev for all OSes
+libcrypto_la_SOURCES += compat/hw_cryptodev.c
