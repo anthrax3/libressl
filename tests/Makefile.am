@@ -1,9 +1,8 @@
 include $(top_srcdir)/Makefile.am.common
 
-bin_PROGRAMS = client_server
+bin_PROGRAMS = http_client
 
-client_server_SOURCES = client_server.c
+http_client_SOURCES = http_client.c
 
-client_server_LDADD = $(top_builddir)/crypto/libcrypto.la
-client_server_LDADD += $(top_builddir)/ssl/libssl.la
-#client_server_LDFLAGS = $(PLATFORM_LDFLAGS)
+http_client_LDADD = $(top_builddir)/crypto/libcrypto.la
+http_client_LDADD += $(top_builddir)/ssl/libssl.la

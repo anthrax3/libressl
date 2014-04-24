@@ -140,3 +140,6 @@ crypto/ui/
 crypto/whrlpool/
 crypto/x509/
 crypto/x509v3/
+
+tests/http_client.exe
+tests/http_client
