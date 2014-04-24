@@ -8,4 +8,5 @@ Run autogen.sh followed by ./configure.
 
 This is an alpha work-in-progress, not ready for general use.
 
-It has been tested to work on Ubuntu 14.04 and Mac OS X 10.9 with static applications.
+It has been tested to work on Ubuntu 14.04 and Mac OS X 10.9 with static
+applications.

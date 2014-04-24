@@ -22,14 +22,21 @@ case $host_os in
 	*) ;;
 esac
 
-AC_CHECK_FUNC(strlcpy,[AC_SEARCH_LIBS(strlcpy,, [NO_STRLCPY=], [NO_STRLCPY=yes])], [NO_STRLCPY=yes])
+AC_CHECK_FUNC(strlcpy,[AC_SEARCH_LIBS(strlcpy,, [NO_STRLCPY=],
+			  [NO_STRLCPY=yes])], [NO_STRLCPY=yes])
 AC_SUBST(NO_STRLCPY)
 AM_CONDITIONAL(NO_STRLCPY, test "x$NO_STRLCPY" = "xyes")
 
-AC_CHECK_FUNC(strlcat,[AC_SEARCH_LIBS(strlcat,, [NO_STRLCAT=], [NO_STRLCAT=yes])], [NO_STRLCAT=yes])
+AC_CHECK_FUNC(strlcat,[AC_SEARCH_LIBS(strlcat,, [NO_STRLCAT=],
+			  [NO_STRLCAT=yes])], [NO_STRLCAT=yes])
 AC_SUBST(NO_STRLCAT)
 AM_CONDITIONAL(NO_STRLCAT, test "x$NO_STRLCAT" = "xyes")
 
+AC_CHECK_FUNC(reallocarray,[AC_SEARCH_LIBS(reallocarray,, [NO_REALLOCARRAY=],
+			  [NO_REALLOCARRAY=yes])], [NO_REALLOCARRAY=yes])
+AC_SUBST(NO_REALLOCARRAY)
+AM_CONDITIONAL(NO_REALLOCARRAY, test "x$NO_REALLOCARRAY" = "xyes")
+
 LT_INIT
 
-AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile crypto/Makefile)
+AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile crypto/Makefile tests/Makefile)
