@@ -1,3 +1,7 @@
+/*
+ * Simple test client from http://savetheions.com/2010/01/16/quickly-using-openssl-in-c/
+ */
+
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -108,12 +112,12 @@ void ssl_disconnect(connection * c)
 }
 
 // Read all available text from the connection
-char *sslRead(connection * c)
+char *ssl_read(connection * c)
 {
 	const int readSize = 1024;
 	char *rc = NULL;
 	int received, count = 0;
-	char buffer[1024];
+	char buffer[1025];
 
 	if (c) {
 		while (1) {
@@ -153,7 +157,7 @@ int main(int argc, char **argv)
 	c = ssl_connect();
 
 	ssl_write(c, "GET /\r\n\r\n");
-	response = sslRead(c);
+	response = ssl_read(c);
 
 	printf("%s\n", response);
 
