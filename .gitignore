@@ -66,6 +66,10 @@ INSTALL
 /stamp-h1
 /stamp-h2
 
+crypto/Makefile.am
+include/openssl/Makefile.am
+ssl/Makefile.am
+
 ssl/*.c
 ssl/*.h
 include/openssl/*.h
