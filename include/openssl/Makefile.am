@@ -39,6 +39,7 @@ opensslinclude_HEADERS += md4.h
 opensslinclude_HEADERS += md5.h
 opensslinclude_HEADERS += mdc2.h
 opensslinclude_HEADERS += modes.h
+opensslinclude_HEADERS += obj_mac.h
 opensslinclude_HEADERS += objects.h
 opensslinclude_HEADERS += ocsp.h
 opensslinclude_HEADERS += opensslconf.h
