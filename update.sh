@@ -220,6 +220,14 @@ copy_crypt x509v3 "v3_bcons.c v3_bitst.c v3_conf.c v3_extku.c v3_ia5.c v3_lib.c
 	pcy_cache.c pcy_node.c pcy_data.c pcy_map.c pcy_tree.c pcy_lib.c v3_asid.c
 	v3_addr.c pcy_int.h ext_dat.h"
 
+copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
+	dgst.c dh.c dhparam.c dsa.c dsaparam.c ec.c ecparam.c enc.c engine.c
+	errstr.c gendh.c gendsa.c genpkey.c genrsa.c nseq.c ocsp.c openssl.c
+	openssl.cnf passwd.c pkcs12.c pkcs7.c pkcs8.c pkey.c pkeyparam.c pkeyutl.c
+	prime.c progs.h rand.c req.c rsa.c rsautl.c s_apps.h s_cb.c s_client.c
+	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c srp.c
+	testdsa.h testrsa.h timeouts.h ts.c verify.c version.c x509.c"
+
 (cd include/openssl
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.h|sort`; do
@@ -245,5 +253,12 @@ copy_crypt x509v3 "v3_bcons.c v3_bitst.c v3_conf.c v3_extku.c v3_ia5.c v3_lib.c
 				echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 			fi
 		done
+	done
+)
+
+(cd apps
+	cp Makefile.am.tpl Makefile.am
+	for i in `ls -1 *.c|sort`; do
+		echo "openssl_SOURCES += $i" >> Makefile.am
 	done
 )

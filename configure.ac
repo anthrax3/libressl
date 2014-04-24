@@ -44,4 +44,5 @@ AM_CONDITIONAL(NO_REALLOCARRAY, test "x$NO_REALLOCARRAY" = "xyes")
 
 LT_INIT
 
-AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile crypto/Makefile tests/Makefile)
+AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile
+		  crypto/Makefile tests/Makefile apps/Makefile)

@@ -74,6 +74,9 @@ ssl/*.c
 ssl/*.h
 include/openssl/*.h
 include/openssl/*.he
+apps/*.c
+apps/*.h
+apps/openssl
 
 crypto/aes/
 crypto/asn1/
