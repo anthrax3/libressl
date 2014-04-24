@@ -1,0 +1,6 @@
+[submodule "libssl-openbsd"]
+	path = libssl-openbsd
+	url = https://github.com/busterb/libssl-openbsd.git
+[submodule "libcrypto-openbsd"]
+	path = libcrypto-openbsd
+	url = https://github.com/busterb/libcrypto-openbsd.git
