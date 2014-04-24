@@ -105,7 +105,7 @@ copy_crypt conf "conf_err.c conf_lib.c conf_api.c conf_def.c conf_mod.c
 	conf_mall.c conf_sap.c conf_def.h"
 
 copy_crypt des "cbc_cksm.c cbc_enc.c cfb64enc.c cfb_enc.c ecb3_enc.c
-	ecb_enc.c  enc_read.c enc_writ.c fcrypt.c ofb64enc.c ofb_enc.c  pcbc_enc.c
+	ecb_enc.c  enc_read.c enc_writ.c fcrypt.c fcrypt_b.c ofb64enc.c ofb_enc.c  pcbc_enc.c
 	qud_cksm.c rand_key.c rpc_enc.c  set_key.c xcbc_enc.c str2key.c  cfb64ede.c
 	ofb64ede.c ede_cbcm_enc.c des_enc.c des_locl.h ncbc_enc.c des_ver.h rpc_des.h spr.h"
 
