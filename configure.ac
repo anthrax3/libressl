@@ -5,7 +5,7 @@ AC_PROG_CC
 
 AC_PROG_LIBTOOL
 AC_PROG_CC_STDC
-CFLAGS="$CFLAGS -Wall -std=c99"
+CFLAGS="$CFLAGS -Wall -std=c99 -O2"
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
