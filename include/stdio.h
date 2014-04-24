@@ -56,8 +56,12 @@ FILE *funopen(const void *cookie,
               off_t (*seekfn)(void *cookie, off_t offset, int whence),
               int (*closefn)(void *cookie));
 
+#ifndef fropen
 #define fropen(cookie, fn) funopen(cookie, fn, NULL, NULL, NULL)
+#endif
+#ifndef fwopen
 #define fwopen(cookie, fn) funopen(cookie, NULL, fn, NULL, NULL)
+#endif
 
 __END_DECLS
 
