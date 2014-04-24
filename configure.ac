@@ -22,6 +22,11 @@ case $host_os in
 	*) ;;
 esac
 
+AC_CHECK_FUNC(funopen,[AC_SEARCH_LIBS(funopen,, [NO_FUNOPEN=],
+			  [NO_FUNOPEN=yes])], [NO_FUNOPEN=yes])
+AC_SUBST(NO_FUNOPEN)
+AM_CONDITIONAL(NO_FUNOPEN, test "x$NO_FUNOPEN" = "xyes")
+
 AC_CHECK_FUNC(strlcpy,[AC_SEARCH_LIBS(strlcpy,, [NO_STRLCPY=],
 			  [NO_STRLCPY=yes])], [NO_STRLCPY=yes])
 AC_SUBST(NO_STRLCPY)

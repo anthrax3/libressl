@@ -9,6 +9,9 @@ lib_LTLIBRARIES = libcrypto.la
 libcrypto_la_LDFLAGS = -version-info 1:1:0
 
 libcrypto_la_SOURCES =
+if NO_FUNOPEN
+libcrypto_la_SOURCES += compat/funopen.c
+endif
 if NO_STRLCAT
 libcrypto_la_SOURCES += compat/strlcat.c
 endif
