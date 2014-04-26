@@ -241,6 +241,9 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	for i in `ls -1 *.c|sort`; do
 		echo "libssl_la_SOURCES += $i" >> Makefile.am
 	done
+	for i in `ls -1 *.h|sort`; do
+		echo "noinst_HEADERS += $i" >> Makefile.am
+	done
 )
 
 (cd crypto
@@ -248,12 +251,21 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	for i in `ls -1 *.c|sort`; do
 		echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 	done
+	for i in `ls -1 *.h|sort`; do
+		echo "noinst_HEADERS += $i" >> Makefile.am
+	done
 	for subdir in $crypto_subdirs; do
 		for i in `ls -1 $subdir/*.c|sort`; do
 			if [ $i != "des/ncbc_enc.c" ]; then
 				echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 			fi
 		done
+		headers=`ls -1 $subdir/*.h 2>/dev/null |sort`
+		if [ "$headers" != "" ]; then
+			for i in $headers; do
+				echo "noinst_HEADERS += $i" >> Makefile.am
+			done
+		fi
 	done
 )
 
@@ -261,5 +273,8 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.c|sort`; do
 		echo "openssl_SOURCES += $i" >> Makefile.am
+	done
+	for i in `ls -1 *.h|sort`; do
+		echo "noinst_HEADERS += $i" >> Makefile.am
 	done
 )

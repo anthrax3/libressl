@@ -1,4 +1,4 @@
-AC_INIT([libopenssl], [1.0.1])
+AC_INIT([libressl], [1.0.1])
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
 AC_PROG_CC
