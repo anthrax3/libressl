@@ -56,7 +56,7 @@ copy_src ssl "s3_meth.c s3_srvr.c s3_clnt.c s3_lib.c s3_enc.c s3_pkt.c
 	t1_srvr.c t1_clnt.c t1_lib.c t1_enc.c d1_meth.c d1_srvr.c d1_clnt.c
 	d1_lib.c d1_pkt.c d1_both.c d1_enc.c d1_srtp.c ssl_lib.c ssl_err2.c
 	ssl_cert.c ssl_sess.c ssl_ciph.c ssl_stat.c ssl_rsa.c ssl_asn1.c ssl_txt.c
-	ssl_algs.c bio_ssl.c ssl_err.c kssl.c tls_srp.c t1_reneg.c s3_cbc.c"
+	ssl_algs.c bio_ssl.c ssl_err.c t1_reneg.c s3_cbc.c"
 
 copy_src crypto "cryptlib.h cryptlib.c malloc-wrapper.c mem_clr.c mem_dbg.c cversion.c
 	ex_data.c cpt_err.c o_time.c o_time.h o_str.c o_init.c md32_common.h"
@@ -106,9 +106,10 @@ copy_crypto conf "conf_err.c conf_lib.c conf_api.c conf_def.c conf_mod.c
 	conf_mall.c conf_sap.c conf_def.h"
 
 copy_crypto des "cbc_cksm.c cbc_enc.c cfb64enc.c cfb_enc.c ecb3_enc.c
-	ecb_enc.c  enc_read.c enc_writ.c fcrypt.c fcrypt_b.c ofb64enc.c ofb_enc.c  pcbc_enc.c
-	qud_cksm.c rand_key.c rpc_enc.c  set_key.c xcbc_enc.c str2key.c  cfb64ede.c
-	ofb64ede.c ede_cbcm_enc.c des_enc.c des_locl.h ncbc_enc.c des_ver.h rpc_des.h spr.h"
+	ecb_enc.c  enc_read.c enc_writ.c fcrypt.c fcrypt_b.c ofb64enc.c ofb_enc.c
+	pcbc_enc.c qud_cksm.c rand_key.c rpc_enc.c  set_key.c xcbc_enc.c str2key.c
+	cfb64ede.c ofb64ede.c ede_cbcm_enc.c des_enc.c des_locl.h ncbc_enc.c
+	des_ver.h rpc_des.h spr.h"
 
 copy_crypto dh "dh_asn1.c dh_gen.c dh_key.c dh_lib.c dh_check.c dh_err.c
 	dh_depr.c dh_ameth.c dh_pmeth.c dh_prn.c"
@@ -121,8 +122,8 @@ copy_crypto dso "dso_dlfcn.c dso_err.c dso_lib.c dso_null.c dso_openssl.c"
 
 copy_crypto ec "ec_lib.c ecp_smpl.c ecp_mont.c ecp_nist.c ec_cvt.c ec_mult.c
 	ec_err.c ec_curve.c ec_check.c ec_print.c ec_asn1.c ec_key.c ec2_smpl.c
-	ec2_mult.c ec_ameth.c ec_pmeth.c eck_prn.c ecp_nistp224.c ecp_nistp256.c
-	ecp_nistp521.c ecp_nistputil.c ecp_oct.c ec2_oct.c ec_oct.c ec_lcl.h"
+	ec2_mult.c ec_ameth.c ec_pmeth.c eck_prn.c ecp_oct.c ec2_oct.c ec_oct.c
+	ec_lcl.h"
 
 copy_crypto ecdh "ech_lib.c ech_ossl.c ech_key.c ech_err.c ech_locl.h"
 
@@ -133,19 +134,19 @@ copy_crypto ecdsa "ecs_lib.c ecs_asn1.c ecs_ossl.c ecs_sign.c ecs_vrf.c
 copy_crypto engine "eng_err.c eng_lib.c eng_list.c eng_init.c eng_ctrl.c
 	eng_table.c eng_pkey.c eng_fat.c eng_all.c tb_rsa.c tb_dsa.c tb_ecdsa.c
 	tb_dh.c tb_ecdh.c tb_rand.c tb_store.c tb_cipher.c tb_digest.c tb_pkmeth.c
-	tb_asnmth.c eng_openssl.c eng_cnf.c eng_dyn.c eng_rsax.c
-	eng_rdrand.c eng_int.h eng_padlock.c"
+	tb_asnmth.c eng_openssl.c eng_cnf.c eng_dyn.c eng_rsax.c eng_rdrand.c
+	eng_int.h eng_padlock.c"
 
 copy_crypto err "err.c err_all.c err_prn.c"
 
 copy_crypto evp "encode.c digest.c evp_enc.c evp_key.c evp_acnf.c e_des.c e_bf.c
-	e_idea.c e_des3.c e_camellia.c e_rc4.c e_aes.c names.c e_xcbc_d.c e_rc2.c
-	e_cast.c e_rc5.c m_null.c m_md4.c m_md5.c m_sha.c m_sha1.c m_wp.c m_dss.c
-	m_dss1.c m_mdc2.c m_ripemd.c m_ecdsa.c p_open.c p_seal.c p_sign.c
-	p_verify.c p_lib.c p_enc.c p_dec.c bio_md.c bio_b64.c bio_enc.c evp_err.c
-	e_null.c c_all.c c_allc.c c_alld.c evp_lib.c bio_ok.c evp_pkey.c evp_pbe.c
-	p5_crpt.c p5_crpt2.c e_old.c pmeth_lib.c pmeth_fn.c pmeth_gn.c m_sigver.c
-	e_aes_cbc_hmac_sha1.c e_rc4_hmac_md5.c evp_locl.h"
+	e_idea.c e_des3.c e_rc4.c e_aes.c names.c e_xcbc_d.c e_rc2.c e_cast.c
+	m_null.c m_md4.c m_md5.c m_sha.c m_sha1.c m_wp.c m_dss.c m_dss1.c m_mdc2.c
+	m_ripemd.c m_ecdsa.c p_open.c p_seal.c p_sign.c p_verify.c p_lib.c p_enc.c
+	p_dec.c bio_md.c bio_b64.c bio_enc.c evp_err.c e_null.c c_all.c c_allc.c
+	c_alld.c evp_lib.c bio_ok.c evp_pkey.c evp_pbe.c p5_crpt.c p5_crpt2.c
+	e_old.c pmeth_lib.c pmeth_fn.c pmeth_gn.c m_sigver.c e_aes_cbc_hmac_sha1.c
+	e_rc4_hmac_md5.c evp_locl.h"
 
 copy_crypto hmac "hmac.c hm_ameth.c hm_pmeth.c"
 
@@ -217,8 +218,8 @@ copy_crypto x509v3 "v3_bcons.c v3_bitst.c v3_conf.c v3_extku.c v3_ia5.c v3_lib.c
 	v3_prn.c v3_utl.c v3err.c v3_genn.c v3_alt.c v3_skey.c v3_akey.c v3_pku.c
 	v3_int.c v3_enum.c v3_sxnet.c v3_cpols.c v3_crld.c v3_purp.c v3_info.c
 	v3_ocsp.c v3_akeya.c v3_pmaps.c v3_pcons.c v3_ncons.c v3_pcia.c v3_pci.c
-	pcy_cache.c pcy_node.c pcy_data.c pcy_map.c pcy_tree.c pcy_lib.c v3_asid.c
-	v3_addr.c pcy_int.h ext_dat.h"
+	pcy_cache.c pcy_node.c pcy_data.c pcy_map.c pcy_tree.c pcy_lib.c
+	pcy_int.h ext_dat.h"
 
 copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	dgst.c dh.c dhparam.c dsa.c dsaparam.c ec.c ecparam.c enc.c engine.c
