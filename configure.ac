@@ -12,13 +12,9 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CANONICAL_HOST
 case $host_os in
 	*linux*)
-		AC_DEFINE(NOT_BSD, 1)
 		CFLAGS="$CFLAGS -D_BSD_SOURCE -D_POSIX_SOURCE -D_GNU_SOURCE" ;;
 	*solaris*)
-		AC_DEFINE(NOT_BSD, 1)
 		CFLAGS="$CFLAGS -D__EXTENSIONS__" ;;
-	*darwin*)
-		AC_SUBST([PLATFORM_LDADD], ['-lpcap -levent_pthreads']) ;;
 	*) ;;
 esac
 
