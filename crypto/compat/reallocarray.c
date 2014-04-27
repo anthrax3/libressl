@@ -21,7 +21,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#define MUL_NO_OVERFLOW (1UL << (sizeof(size_t) * 4))
+#define MUL_NO_OVERFLOW (1ULL << (sizeof(size_t) * 4))
 
 void *
 reallocarray(void *optr, size_t nmemb, size_t size)
