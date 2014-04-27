@@ -4,6 +4,7 @@
 
 #include <openssl/bio.h>
 #include <stdio.h>
+#include <string.h>
 
 int
 BIO_printf(BIO *bio, const char *format, ...)
