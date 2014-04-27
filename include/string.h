@@ -40,6 +40,7 @@ __BEGIN_DECLS
 size_t strlcpy(char *dst, const char *src, size_t siz);
 size_t strlcat(char *dst, const char *src, size_t siz);
 void explicit_bzero(void *, size_t);
+void bzero(void *s, size_t n);
 __END_DECLS
 
 #endif

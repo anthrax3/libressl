@@ -81,7 +81,7 @@ copy_crypto asn1 "a_object.c a_bitstr.c a_utctm.c a_gentm.c a_time.c
 copy_crypto bf "bf_skey.c bf_ecb.c bf_enc.c bf_cfb64.c bf_ofb64.c bf_locl.h bf_pi.h"
 
 copy_crypto bio "bio_lib.c bio_cb.c bio_err.c bss_mem.c bss_null.c bss_fd.c
-	bss_file.c bss_sock.c bss_conn.c bf_null.c bf_buff.c b_print.c b_dump.c
+	bss_file.c bss_sock.c bss_conn.c bf_null.c bf_buff.c b_dump.c
 	b_sock.c bss_acpt.c bf_nbio.c bss_log.c bss_bio.c bss_dgram.c"
 
 copy_crypto bn "bn_add.c bn_asm.c bn_div.c bn_exp.c bn_lib.c bn_ctx.c bn_mul.c

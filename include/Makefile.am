@@ -1,3 +1,3 @@
 SUBDIRS = openssl
 
-noinst_HEADERS = stdio.h stdlib.h string.h machine/endian.h
+noinst_HEADERS = stdlib.h string.h machine/endian.h
