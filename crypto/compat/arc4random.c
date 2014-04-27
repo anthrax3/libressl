@@ -39,7 +39,6 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <pthread.h>
 
 struct arc4_stream {
 	uint8_t i;
@@ -51,10 +50,21 @@ struct arc4_stream {
 #define KEYSIZE		128
 
 #ifdef __REENTRANT
+#ifdef _WIN32
+#include <windows.h>
+static CRITICAL_SECTION arc4random_mtx;
+#define THREAD_INIT() InitializeCriticalSection(&arc4random_mtx)
+#define THREAD_LOCK() EnterCriticalSection(&arc4random_mtx)
+#define THREAD_UNLOCK() LeaveCriticalSection(&arc4random_mtx)
+#else
+#include <pthread.h>
 static pthread_mutex_t arc4random_mtx = PTHREAD_MUTEX_INITIALIZER;
+#define THREAD_INIT()
 #define	THREAD_LOCK()	pthread_mutex_lock(&arc4random_mtx)
 #define	THREAD_UNLOCK()	pthread_mutex_unlock(&arc4random_mtx)
+#endif
 #else
+#define THREAD_INIT()
 #define	THREAD_LOCK()
 #define	THREAD_UNLOCK()
 #endif
@@ -71,6 +81,7 @@ static inline void
 arc4_init(void)
 {
 	int     n;
+	THREAD_INIT();
 
 	for (n = 0; n < 256; n++)
 		rs.s[n] = n;
