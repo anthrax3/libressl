@@ -29,6 +29,10 @@ cp libssl-openbsd/src/CHANGES ChangeLog
 cp libcrypto-openbsd/crypto/arch/amd64/opensslconf.h include/openssl
 cp libssl-openbsd/src/e_os2.h include/openssl
 
+(cd ./libssl-openbsd/src/crypto/objects/;
+	perl objects.pl objects.txt obj_mac.num obj_mac.h)
+mv libssl-openbsd/src/crypto/objects/obj_mac.h ./include/openssl/obj_mac.h
+
 copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	ossl_typ.h err/err.h crypto.h comp/comp.h x509/x509.h buffer/buffer.h
 	evp/evp.h objects/objects.h asn1/asn1.h bn/bn.h ec/ec.h ecdsa/ecdsa.h
@@ -39,7 +43,7 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	bio/bio.h cast/cast.h cmac/cmac.h conf/conf_api.h des/des.h dh/dh.h
 	dsa/dsa.h cms/cms.h engine/engine.h ui/ui.h pkcs12/pkcs12.h ts/ts.h
 	md4/md4.h ripemd/ripemd.h whrlpool/whrlpool.h idea/idea.h mdc2/mdc2.h
-	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h"
+	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h chacha/chacha.h"
 
 copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h"
 
@@ -95,6 +99,8 @@ copy_crypto buffer "buffer.c buf_err.c buf_str.c"
 copy_crypto cast "c_skey.c c_ecb.c c_enc.c c_cfb64.c c_ofb64.c cast_lcl.h
 	cast_s.h"
 
+copy_crypto chacha "chacha.c chacha-merged.c"
+
 copy_crypto cmac "cmac.c cm_ameth.c cm_pmeth.c"
 
 #copy_crypto cms "cms_lib.c cms_asn1.c cms_att.c cms_io.c cms_smime.c cms_err.c
@@ -146,7 +152,7 @@ copy_crypto evp "encode.c digest.c evp_enc.c evp_key.c evp_acnf.c e_des.c e_bf.c
 	p_dec.c bio_md.c bio_b64.c bio_enc.c evp_err.c e_null.c c_all.c c_allc.c
 	c_alld.c evp_lib.c bio_ok.c evp_pkey.c evp_pbe.c p5_crpt.c p5_crpt2.c
 	e_old.c pmeth_lib.c pmeth_fn.c pmeth_gn.c m_sigver.c e_aes_cbc_hmac_sha1.c
-	e_rc4_hmac_md5.c evp_locl.h"
+	e_rc4_hmac_md5.c evp_locl.h e_chacha.c"
 
 copy_crypto hmac "hmac.c hm_ameth.c hm_pmeth.c"
 
@@ -205,7 +211,7 @@ copy_crypto ts "ts_err.c ts_req_utils.c ts_req_print.c ts_rsp_utils.c
 
 copy_crypto txt_db "txt_db.c"
 
-copy_crypto ui "ui_err.c ui_lib.c ui_openssl.c ui_util.c ui_compat.c ui_locl.h"
+copy_crypto ui "ui_err.c ui_lib.c ui_openssl.c ui_util.c ui_locl.h"
 
 copy_crypto whrlpool "wp_block.c wp_dgst.c wp_locl.h"
 
@@ -256,7 +262,7 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	done
 	for subdir in $crypto_subdirs; do
 		for i in `ls -1 $subdir/*.c|sort`; do
-			if [ $i != "des/ncbc_enc.c" ]; then
+			if [ $i != "des/ncbc_enc.c" -a $i != "chacha/chacha-merged.c" ]; then
 				echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 			fi
 		done

@@ -87,6 +87,7 @@ crypto/bio/
 crypto/bn/
 crypto/buffer/
 crypto/cast/
+crypto/chacha/
 crypto/cmac/
 crypto/comp/
 crypto/conf/
