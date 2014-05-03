@@ -35,7 +35,7 @@ mv libssl-openbsd/src/crypto/objects/obj_mac.h ./include/openssl/obj_mac.h
 
 copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	ossl_typ.h err/err.h crypto.h comp/comp.h x509/x509.h buffer/buffer.h
-	evp/evp.h objects/objects.h asn1/asn1.h bn/bn.h ec/ec.h ecdsa/ecdsa.h
+	objects/objects.h asn1/asn1.h bn/bn.h ec/ec.h ecdsa/ecdsa.h
 	ecdh/ecdh.h rsa/rsa.h sha/sha.h x509/x509_vfy.h pkcs7/pkcs7.h pem/pem.h
 	pem/pem2.h hmac/hmac.h pqueue/pqueue.h rand/rand.h md5/md5.h
 	krb5/krb5_asn.h asn1/asn1_mac.h x509v3/x509v3.h conf/conf.h ocsp/ocsp.h
