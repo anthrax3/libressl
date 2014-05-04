@@ -30,8 +30,10 @@ cp libcrypto-openbsd/crypto/arch/amd64/opensslconf.h include/openssl
 cp libssl-openbsd/src/e_os2.h include/openssl
 
 (cd ./libssl-openbsd/src/crypto/objects/;
-	perl objects.pl objects.txt obj_mac.num obj_mac.h)
+	perl objects.pl objects.txt obj_mac.num obj_mac.h;
+	perl obj_dat.pl obj_mac.h obj_dat.h )
 mv libssl-openbsd/src/crypto/objects/obj_mac.h ./include/openssl/obj_mac.h
+mv libssl-openbsd/src/crypto/objects/obj_dat.h ./crypto/objects/obj_dat.h
 
 copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	ossl_typ.h err/err.h crypto.h comp/comp.h x509/x509.h buffer/buffer.h

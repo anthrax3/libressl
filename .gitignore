@@ -122,12 +122,7 @@ crypto/o_init.c
 crypto/o_str.c
 crypto/o_time.c
 crypto/o_time.h
-crypto/objects/o_names.c
-crypto/objects/obj_dat.c
-crypto/objects/obj_err.c
-crypto/objects/obj_lib.c
-crypto/objects/obj_xref.c
-crypto/objects/obj_xref.h
+crypto/objects
 crypto/ocsp/
 crypto/pem/
 crypto/pkcs12/
