@@ -1,14 +1,11 @@
 AC_INIT([libressl], [1.0.1])
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
-AC_PROG_CC
-
-AC_PROG_LIBTOOL
-AC_PROG_CC_STDC
-AM_PROG_CC_C_O
-CFLAGS="$CFLAGS -Wall -std=c99 -O2 -g"
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+AC_SUBST([USER_CFLAGS], "-O2 $CFLAGS")
+CFLAGS="-Wall -std=c99 -g"
 
 AC_CANONICAL_HOST
 case $host_os in
@@ -18,6 +15,11 @@ case $host_os in
 		CFLAGS="$CFLAGS -D__EXTENSIONS__" ;;
 	*) ;;
 esac
+
+AC_PROG_CC
+AC_PROG_LIBTOOL
+AC_PROG_CC_STDC
+AM_PROG_CC_C_O
 
 AC_CHECK_FUNC(strlcpy,[AC_SEARCH_LIBS(strlcpy,, [NO_STRLCPY=],
 			  [NO_STRLCPY=yes])], [NO_STRLCPY=yes])
