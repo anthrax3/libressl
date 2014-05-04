@@ -96,37 +96,35 @@ _rs_init(u_char *buf, size_t n)
 static void
 _rs_stir(void)
 {
-	int done, fd;
-	struct {
-		struct timeval  tv;
-		pid_t           pid;
-		uint8_t         rnd[KEYSIZE];
-	} rdat;
+	int fd;
+	u_char rnd[KEYSIZE];
 
 	fd = open(RANDOMDEV, O_RDONLY, 0);
-	done = 0;
+	int done = 0;
 	if (fd >= 0) {
-		if (read(fd, &rdat, KEYSIZE) == KEYSIZE)
+		if (read(fd, rnd, sizeof(rnd)) == KEYSIZE)
 			done = 1;
 		(void)close(fd);
 	}
 	if (!done) {
-		(void)gettimeofday(&rdat.tv, NULL);
-		rdat.pid = getpid();
-		/* We'll just take whatever was on the stack too... */
+		/*
+		 * For now, die if RANDOMDEV is not available
+		 * http://www.gossamer-threads.com/lists/openssh/dev/58538#58538
+		 */
+		 abort();
 	}
 
 	if (!rs_initialized) {
 		rs_initialized = 1;
 		THREAD_INIT();
-		_rs_init((u_char *)&rdat, sizeof(rdat));
+		_rs_init(rnd, sizeof(rnd));
 	} else
-		_rs_rekey((u_char *)&rdat, sizeof(rdat));
-	memset(&rdat, 0, sizeof(rdat));
+		_rs_rekey(rnd, sizeof(rnd));
+	explicit_bzero(rnd, sizeof(rnd));
 
 	/* invalidate rs_buf */
 	rs_have = 0;
-	memset(rs_buf, 0, RSBUFSZ);
+	explicit_bzero(rs_buf, RSBUFSZ);
 
 	rs_count = 1600000;
 }
