@@ -6,25 +6,33 @@ AM_CPPFLAGS += -I$(top_srcdir)/crypto/modes
 
 lib_LTLIBRARIES = libcrypto.la
 
+libcrypto_la_LIBADD = libcompat.la libcompatnoopt.la
 libcrypto_la_LDFLAGS = -version-info 1:1:0
 
-libcrypto_la_SOURCES =
+noinst_LTLIBRARIES = libcompat.la libcompatnoopt.la
+
+# compatibility functions that need to be build without optimizations
+libcompatnoopt_la_CFLAGS = -O0
+libcompatnoopt_la_SOURCES = compat/explicit_bzero.c
+
+# other compatibility functions
+libcompat_la_SOURCES =
 if NO_STRLCAT
-libcrypto_la_SOURCES += compat/strlcat.c
+libcompat_la_SOURCES += compat/strlcat.c
 endif
 if NO_STRLCPY
-libcrypto_la_SOURCES += compat/strlcpy.c
+libcompat_la_SOURCES += compat/strlcpy.c
 endif
 if NO_REALLOCARRAY
-libcrypto_la_SOURCES += compat/reallocarray.c
+libcompat_la_SOURCES += compat/reallocarray.c
 endif
 if NO_BZERO
-libcrypto_la_SOURCES += compat/bzero.c
+libcompat_la_SOURCES += compat/bzero.c
 endif
-libcrypto_la_SOURCES += compat/arc4random.c
-libcrypto_la_SOURCES += compat/explicit_bzero.c
+libcompat_la_SOURCES += compat/arc4random.c
 # disable cryptodev for all OSes
-libcrypto_la_SOURCES += compat/hw_cryptodev.c
-libcrypto_la_SOURCES += compat/b_print.c
+libcompat_la_SOURCES += compat/hw_cryptodev.c
+libcompat_la_SOURCES += compat/b_print.c
 
 noinst_HEADERS = des/ncbc_enc.c
+libcrypto_la_SOURCES =
