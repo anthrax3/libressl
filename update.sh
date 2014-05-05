@@ -32,6 +32,7 @@ cp libssl-openbsd/src/e_os2.h include/openssl
 (cd ./libssl-openbsd/src/crypto/objects/;
 	perl objects.pl objects.txt obj_mac.num obj_mac.h;
 	perl obj_dat.pl obj_mac.h obj_dat.h )
+mkdir -p include/openssl crypto/objects
 mv libssl-openbsd/src/crypto/objects/obj_mac.h ./include/openssl/obj_mac.h
 mv libssl-openbsd/src/crypto/objects/obj_dat.h ./crypto/objects/obj_dat.h
 
