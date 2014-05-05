@@ -8,12 +8,18 @@ Run autogen.sh followed by ./configure.
 
 This is an alpha work-in-progress, not ready for general use.
 
-It has been tested to work on:
+Caveat Emptor:
+While this project uses compatibility shims from libbsd, and in some cases code
+directly from OpenBSD's libc, it will probably never work exactly the same as
+if it is running on OpenBSD.  Until there is an official port of LibreSSL (and
+	even after), please conduct your own audits and patches are always welcome.
+
+Luckily there is not much actual code in this port, so it is easy to review.
+
+http://insanecoding.blogspot.com/2014/04/common-libressl-porting-mistakes.html
+http://insanecoding.blogspot.com/2014/05/a-good-idea-with-bad-usage-devurandom.html
+
+It has been tested to build on:
  Ubuntu 14.04 amd64
  FreeBSD 10 amd64
  Mac OS X 10.9.2
-
-TODO:
-  CPU detection
-  configurable algorithm support
-  acceleration
