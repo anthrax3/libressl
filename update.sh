@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # resync this library with the upstream project
 git submodule init
