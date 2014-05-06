@@ -252,13 +252,17 @@ done
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *test.c|sort`; do
 		TEST=`echo $i|sed -e "s/\.c//"`
+		if [ $TEST != "evptest" ]; then
 		echo "TESTS += $TEST" >> Makefile.am
+		fi
 		echo "check_PROGRAMS += $TEST" >> Makefile.am
 		echo "${TEST}_SOURCES = $i" >> Makefile.am
 		echo "${TEST}_LDADD = \$(top_builddir)/crypto/libcrypto.la" >> Makefile.am
 		echo "${TEST}_LDADD += \$(top_builddir)/ssl/libssl.la" >> Makefile.am
 	done
 )
+cp libcrypto-regress-openbsd/evp/evptests.txt tests
+echo "TESTS += evptest.sh" >> tests/Makefile.am
 
 (cd include/openssl
 	cp Makefile.am.tpl Makefile.am

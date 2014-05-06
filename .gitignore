@@ -77,6 +77,7 @@ crypto/Makefile.am
 include/openssl/Makefile.am
 ssl/Makefile.am
 apps/Makefile.am
+tests/Makefile.am
 
 ssl/*.c
 ssl/*.h
@@ -151,3 +152,4 @@ crypto/x509v3/
 
 tests/http_client.exe
 tests/http_client
+tests/evptests.txt
