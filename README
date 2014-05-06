@@ -4,8 +4,13 @@ it is buildable on other systems.
 
 To build, you need autoconf, automake and libtool installed.
 
-Run autogen.sh followed by ./configure.
+Run autogen.sh followed by ./configure; make; make check
 
+Note that multi-threaded builds work as expected. You may need to periodically
+clean up your source tree or rerun autogen.sh/update.sh to get the latest
+source.
+
+Warning:
 This is an alpha work-in-progress, not ready for general use.
 
 Caveat Emptor:
