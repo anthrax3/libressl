@@ -5,6 +5,8 @@ set -e
 git submodule init
 git submodule update
 
+crypto_subdirs=
+
 copy_src() {
 	mkdir -p $1
 	rm -f $1/*.c
@@ -68,8 +70,6 @@ copy_src ssl "s3_meth.c s3_srvr.c s3_clnt.c s3_lib.c s3_enc.c s3_pkt.c
 
 copy_src crypto "cryptlib.h cryptlib.c malloc-wrapper.c mem_clr.c mem_dbg.c cversion.c
 	ex_data.c cpt_err.c o_time.c o_time.h o_str.c o_init.c md32_common.h"
-
-crypto_subdirs=
 
 copy_crypto aes "aes_cbc.c aes_core.c aes_misc.c aes_ecb.c aes_cfb.c aes_ofb.c aes_ctr.c
 	aes_ige.c aes_wrap.c aes_locl.h"
@@ -238,6 +238,27 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	prime.c progs.h rand.c req.c rsa.c rsautl.c s_apps.h s_cb.c s_client.c
 	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c srp.c
 	testdsa.h testrsa.h timeouts.h ts.c verify.c version.c x509.c"
+
+for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
+	chacha/chachatest.c des/destest.c dh/dhtest.c dsa/dsatest.c ec/ectest.c \
+	ecdh/ecdhtest.c ecdsa/ecdsatest.c engine/enginetest.c evp/evptest.c \
+	exp/exptest.c hmac/hmactest.c idea/ideatest.c ige/igetest.c md4/md4test.c \
+	md5/md5test.c mdc2/mdc2test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c \
+	rmd/rmdtest.c sha/shatest.c sha1/sha1test.c; do
+	 cp libcrypto-regress-openbsd/$i tests
+done
+
+(cd tests
+	cp Makefile.am.tpl Makefile.am
+	for i in `ls -1 *test.c|sort`; do
+		TEST=`echo $i|sed -e "s/\.c//"`
+		echo "TESTS += $TEST" >> Makefile.am
+		echo "check_PROGRAMS += $TEST" >> Makefile.am
+		echo "${TEST}_SOURCES = $i" >> Makefile.am
+		echo "${TEST}_LDADD = \$(top_builddir)/crypto/libcrypto.la" >> Makefile.am
+		echo "${TEST}_LDADD += \$(top_builddir)/ssl/libssl.la" >> Makefile.am
+	done
+)
 
 (cd include/openssl
 	cp Makefile.am.tpl Makefile.am

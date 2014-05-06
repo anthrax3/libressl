@@ -4,3 +4,6 @@
 [submodule "libcrypto-openbsd"]
 	path = libcrypto-openbsd
 	url = https://github.com/busterb/libcrypto-openbsd.git
+[submodule "libcrypto-regress-openbsd"]
+	path = libcrypto-regress-openbsd
+	url = https://github.com/busterb/libcrypto-regress-openbsd.git

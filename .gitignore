@@ -34,6 +34,13 @@ Makefile.in
 *.lo
 *.la
 
+# tests
+test-driver
+*.log
+*.trs
+tests/*test
+tests/*test.c
+
 # ctags stuff
 TAGS
 
