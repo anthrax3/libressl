@@ -1,9 +1,6 @@
-/*  $OpenBSD: malloc.c,v 1.158 2014/04/23 15:07:27 tedu Exp $   */
+/*	$OpenBSD: reallocarray.c,v 1.1 2014/05/08 21:43:49 deraadt Exp $	*/
 /*
- * Copyright (c) 2008, 2010, 2011 Otto Moerbeek <otto@drijf.net>
- * Copyright (c) 2012 Matthew Dempsky <matthew@openbsd.org>
- * Copyright (c) 2008 Damien Miller <djm@openbsd.org>
- * Copyright (c) 2000 Poul-Henning Kamp <phk@FreeBSD.org>
+ * Copyright (c) 2008 Otto Moerbeek <otto@drijf.net>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,16 +15,22 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <sys/types.h>
 #include <errno.h>
+#include <stdint.h>
 #include <stdlib.h>
 
-#define MUL_NO_OVERFLOW (1ULL << (sizeof(size_t) * 4))
+/*
+ * This is sqrt(SIZE_MAX+1), as s1*s2 <= SIZE_MAX
+ * if both s1 < MUL_NO_OVERFLOW and s2 < MUL_NO_OVERFLOW
+ */
+#define MUL_NO_OVERFLOW	(1UL << (sizeof(size_t) * 4))
 
 void *
 reallocarray(void *optr, size_t nmemb, size_t size)
 {
 	if ((nmemb >= MUL_NO_OVERFLOW || size >= MUL_NO_OVERFLOW) &&
-		nmemb > 0 && SIZE_MAX / nmemb < size) {
+	    nmemb > 0 && SIZE_MAX / nmemb < size) {
 		errno = ENOMEM;
 		return NULL;
 	}
