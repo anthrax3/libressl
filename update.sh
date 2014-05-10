@@ -45,7 +45,7 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	ecdh/ecdh.h rsa/rsa.h sha/sha.h x509/x509_vfy.h pkcs7/pkcs7.h pem/pem.h
 	pem/pem2.h hmac/hmac.h pqueue/pqueue.h rand/rand.h md5/md5.h
 	krb5/krb5_asn.h asn1/asn1_mac.h x509v3/x509v3.h conf/conf.h ocsp/ocsp.h
-	srp/srp.h aes/aes.h modes/modes.h asn1/asn1t.h dso/dso.h bf/blowfish.h
+	aes/aes.h modes/modes.h asn1/asn1t.h dso/dso.h bf/blowfish.h
 	bio/bio.h cast/cast.h cmac/cmac.h conf/conf_api.h des/des.h dh/dh.h
 	dsa/dsa.h cms/cms.h engine/engine.h ui/ui.h pkcs12/pkcs12.h ts/ts.h
 	md4/md4.h ripemd/ripemd.h whrlpool/whrlpool.h idea/idea.h mdc2/mdc2.h
@@ -236,7 +236,7 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	errstr.c gendh.c gendsa.c genpkey.c genrsa.c nseq.c ocsp.c openssl.c
 	openssl.cnf passwd.c pkcs12.c pkcs7.c pkcs8.c pkey.c pkeyparam.c pkeyutl.c
 	prime.c progs.h rand.c req.c rsa.c rsautl.c s_apps.h s_cb.c s_client.c
-	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c srp.c
+	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c
 	testdsa.h testrsa.h timeouts.h ts.c verify.c version.c x509.c"
 
 for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
