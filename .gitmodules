@@ -7,3 +7,7 @@
 [submodule "libcrypto-regress-openbsd"]
 	path = libcrypto-regress-openbsd
 	url = https://github.com/busterb/libcrypto-regress-openbsd.git
+[submodule "libottery"]
+	path = libottery
+	ignore = dirty
+	url = https://github.com/nmathewson/libottery.git
