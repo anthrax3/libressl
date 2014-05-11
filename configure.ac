@@ -43,7 +43,7 @@ AM_CONDITIONAL(NO_BZERO, test "x$NO_BZERO" = "xyes")
 
 LT_INIT
 
-#AC_CONFIG_FILES([Makefile])
+ac_configure_args="$ac_configure_args CFLAGS=-DNO_OPENSSL LDFLAGS=-L../crypto"
 AC_CONFIG_SUBDIRS([libottery])
 AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile
           crypto/Makefile tests/Makefile apps/Makefile)
