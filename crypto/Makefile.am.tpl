@@ -6,7 +6,8 @@ AM_CPPFLAGS += -I$(top_srcdir)/crypto/modes
 
 lib_LTLIBRARIES = libcrypto.la
 
-libcrypto_la_LIBADD = libcompat.la libcompatnoopt.la ../libottery/libottery.la
+libcrypto_la_LIBADD = libcompat.la libcompatnoopt.la
+libcrypto_la_LIBADD += $(top_builddir)/libottery/libottery.la
 libcrypto_la_LDFLAGS = -version-info 1:1:0
 libcrypto_la_CFLAGS = $(USER_CFLAGS)
 
