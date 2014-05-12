@@ -53,8 +53,6 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 
 copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h"
 
-sed -ie 's/__attribute__((__bounded__.*;/;/' include/openssl/bio.h
-
 for i in ssl/srtp.h \
 	ssl/kssl_lcl.h \
 	ssl/ssl_locl.h; do
@@ -270,6 +268,11 @@ echo "TESTS += evptest.sh" >> tests/Makefile.am
 		echo "opensslinclude_HEADERS += $i" >> Makefile.am
 	done
 )
+
+# remove unsupported __bounded__ attributes
+for i in include/openssl/bio.h crypto/chacha/chacha-merged.c; do
+	sed -ie 's/__attribute__((__bounded__.*/;/' $i
+done
 
 (cd ssl
 	cp Makefile.am.tpl Makefile.am
