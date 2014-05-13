@@ -43,7 +43,7 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	ossl_typ.h err/err.h crypto.h comp/comp.h x509/x509.h buffer/buffer.h
 	objects/objects.h asn1/asn1.h bn/bn.h ec/ec.h ecdsa/ecdsa.h
 	ecdh/ecdh.h rsa/rsa.h sha/sha.h x509/x509_vfy.h pkcs7/pkcs7.h pem/pem.h
-	pem/pem2.h hmac/hmac.h pqueue/pqueue.h rand/rand.h md5/md5.h
+	pem/pem2.h hmac/hmac.h rand/rand.h md5/md5.h
 	krb5/krb5_asn.h asn1/asn1_mac.h x509v3/x509v3.h conf/conf.h ocsp/ocsp.h
 	aes/aes.h modes/modes.h asn1/asn1t.h dso/dso.h bf/blowfish.h
 	bio/bio.h cast/cast.h cmac/cmac.h conf/conf_api.h des/des.h dh/dh.h
@@ -51,7 +51,7 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	md4/md4.h ripemd/ripemd.h whrlpool/whrlpool.h idea/idea.h mdc2/mdc2.h
 	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h chacha/chacha.h evp/evp.h"
 
-copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h"
+copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h pqueue.h"
 
 for i in ssl/srtp.h \
 	ssl/kssl_lcl.h \
@@ -64,7 +64,7 @@ copy_src ssl "s3_meth.c s3_srvr.c s3_clnt.c s3_lib.c s3_enc.c s3_pkt.c
 	t1_srvr.c t1_clnt.c t1_lib.c t1_enc.c d1_meth.c d1_srvr.c d1_clnt.c
 	d1_lib.c d1_pkt.c d1_both.c d1_enc.c d1_srtp.c ssl_lib.c ssl_err2.c
 	ssl_cert.c ssl_sess.c ssl_ciph.c ssl_stat.c ssl_rsa.c ssl_asn1.c ssl_txt.c
-	ssl_algs.c bio_ssl.c ssl_err.c t1_reneg.c s3_cbc.c"
+	ssl_algs.c bio_ssl.c ssl_err.c t1_reneg.c s3_cbc.c pqueue.c"
 
 copy_src crypto "cryptlib.h cryptlib.c malloc-wrapper.c mem_clr.c mem_dbg.c cversion.c
 	ex_data.c cpt_err.c o_time.c o_time.h o_str.c o_init.c md32_common.h"
@@ -187,8 +187,6 @@ copy_crypto pkcs12 "p12_add.c p12_asn.c p12_attr.c p12_crpt.c p12_crt.c
 
 copy_crypto pkcs7 "pk7_asn1.c pk7_lib.c pkcs7err.c pk7_doit.c pk7_smime.c
 	pk7_attr.c pk7_mime.c bio_pk7.c"
-
-copy_crypto pqueue "pqueue.c"
 
 copy_crypto rand "randfile.c rand_err.c"
 
