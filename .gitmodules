@@ -10,4 +10,4 @@
 [submodule "libottery"]
 	path = libottery
 	ignore = dirty
-	url = https://github.com/nmathewson/libottery.git
+	url = https://github.com/busterb/libottery.git

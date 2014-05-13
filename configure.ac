@@ -5,7 +5,7 @@ AC_CONFIG_MACRO_DIR([m4])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 AC_SUBST([USER_CFLAGS], "-O2 $CFLAGS")
-CFLAGS="-Wall -Werror -std=c99 -g"
+CFLAGS="$CFLAGS -Wall -Werror -std=c99 -g"
 
 AC_CANONICAL_HOST
 case $host_os in
@@ -45,7 +45,7 @@ AM_CONDITIONAL(NO_BZERO, test "x$NO_BZERO" = "xyes")
 
 LT_INIT
 
-ac_configure_args="$ac_configure_args CFLAGS=-DNO_OPENSSL LDFLAGS=-L../crypto"
+ac_configure_args="$ac_configure_args CFLAGS=\"$CFLAGS -DNO_OPENSSL\" LDFLAGS=\"$LDFLAGS -L../crypto\""
 AC_CONFIG_SUBDIRS([libottery])
 AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile
           crypto/Makefile tests/Makefile apps/Makefile)
