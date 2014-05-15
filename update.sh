@@ -49,7 +49,8 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	bio/bio.h cast/cast.h cmac/cmac.h conf/conf_api.h des/des.h dh/dh.h
 	dsa/dsa.h cms/cms.h engine/engine.h ui/ui.h pkcs12/pkcs12.h ts/ts.h
 	md4/md4.h ripemd/ripemd.h whrlpool/whrlpool.h idea/idea.h mdc2/mdc2.h
-	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h chacha/chacha.h evp/evp.h"
+	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h chacha/chacha.h evp/evp.h
+	poly1305/poly1305.h"
 
 copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h pqueue.h"
 
@@ -188,6 +189,8 @@ copy_crypto pkcs12 "p12_add.c p12_asn.c p12_attr.c p12_crpt.c p12_crt.c
 copy_crypto pkcs7 "pk7_asn1.c pk7_lib.c pkcs7err.c pk7_doit.c pk7_smime.c
 	pk7_attr.c pk7_mime.c bio_pk7.c"
 
+copy_crypto poly1305 "poly1305-donna.c poly1305.c"
+
 copy_crypto rand "randfile.c rand_err.c"
 
 copy_crypto rc2 "rc2_ecb.c rc2_skey.c rc2_cbc.c rc2cfb64.c rc2ofb64.c rc2_locl.h"
@@ -240,7 +243,7 @@ for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
 	ecdh/ecdhtest.c ecdsa/ecdsatest.c engine/enginetest.c evp/evptest.c \
 	exp/exptest.c hmac/hmactest.c idea/ideatest.c ige/igetest.c md4/md4test.c \
 	md5/md5test.c mdc2/mdc2test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c \
-	rmd/rmdtest.c sha/shatest.c sha1/sha1test.c; do
+	rmd/rmdtest.c sha/shatest.c sha1/sha1test.c poly1305/poly1305test.c; do
 	 cp libcrypto-regress-openbsd/$i tests
 done
 
@@ -292,7 +295,9 @@ done
 	done
 	for subdir in $crypto_subdirs; do
 		for i in `ls -1 $subdir/*.c|sort`; do
-			if [ $i != "des/ncbc_enc.c" -a $i != "chacha/chacha-merged.c" ]; then
+			if [ $i != "des/ncbc_enc.c" -a \
+				 $i != "chacha/chacha-merged.c" -a \
+				 $i != "poly1305/poly1305-donna.c" ]; then
 				echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 			fi
 		done
