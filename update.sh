@@ -31,6 +31,7 @@ cp libssl-openbsd/src/CHANGES ChangeLog
 
 cp libcrypto-openbsd/crypto/arch/amd64/opensslconf.h include/openssl
 cp libssl-openbsd/src/e_os2.h include/openssl
+cp libssl-openbsd/src/ssl/pqueue.h include
 
 (cd ./libssl-openbsd/src/crypto/objects/;
 	perl objects.pl objects.txt obj_mac.num obj_mac.h;
@@ -52,10 +53,9 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h chacha/chacha.h evp/evp.h
 	poly1305/poly1305.h"
 
-copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h pqueue.h"
+copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h"
 
 for i in ssl/srtp.h \
-	ssl/kssl_lcl.h \
 	ssl/ssl_locl.h; do
 	cp libssl-openbsd/src/$i ssl
 done
@@ -148,7 +148,7 @@ copy_crypto engine "eng_err.c eng_lib.c eng_list.c eng_init.c eng_ctrl.c
 
 copy_crypto err "err.c err_all.c err_prn.c"
 
-copy_crypto evp "encode.c digest.c evp_enc.c evp_key.c evp_acnf.c e_des.c e_bf.c
+copy_crypto evp "encode.c digest.c evp_enc.c evp_key.c e_des.c e_bf.c
 	e_idea.c e_des3.c e_rc4.c e_aes.c names.c e_xcbc_d.c e_rc2.c e_cast.c
 	m_null.c m_md4.c m_md5.c m_sha.c m_sha1.c m_wp.c m_dss.c m_dss1.c m_mdc2.c
 	m_ripemd.c m_ecdsa.c p_open.c p_seal.c p_sign.c p_verify.c p_lib.c p_enc.c

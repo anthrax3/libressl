@@ -81,6 +81,7 @@ tests/Makefile.am
 
 ssl/*.c
 ssl/*.h
+include/pqueue.h
 include/openssl/*.h
 include/openssl/*.he
 apps/*.c
@@ -135,6 +136,7 @@ crypto/ocsp/
 crypto/pem/
 crypto/pkcs12/
 crypto/pkcs7/
+crypto/poly1305/
 crypto/pqueue/
 crypto/rand/
 crypto/rc2/
