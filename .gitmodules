@@ -11,3 +11,6 @@
 	path = libottery
 	ignore = dirty
 	url = https://github.com/busterb/libottery.git
+[submodule "libssl-regress-openbsd"]
+	path = libssl-regress-openbsd
+	url = https://github.com/busterb/libssl-regress-openbsd.git

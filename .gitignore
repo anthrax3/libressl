@@ -40,6 +40,8 @@ test-driver
 *.trs
 tests/*test
 tests/*test.c
+tests/*.pem
+tests/testssl
 
 # ctags stuff
 TAGS

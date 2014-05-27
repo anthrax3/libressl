@@ -247,11 +247,15 @@ for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
 	 cp libcrypto-regress-openbsd/$i tests
 done
 
+for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
+	cp libssl-regress-openbsd/$i tests
+done
+
 (cd tests
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *test.c|sort`; do
 		TEST=`echo $i|sed -e "s/\.c//"`
-		if [ $TEST != "evptest" ]; then
+		if [ $TEST != "evptest" -a $TEST != "ssltest" ]; then
 		echo "TESTS += $TEST" >> Makefile.am
 		fi
 		echo "check_PROGRAMS += $TEST" >> Makefile.am
@@ -261,7 +265,9 @@ done
 	done
 )
 cp libcrypto-regress-openbsd/evp/evptests.txt tests
+chmod 755 tests/testssl
 echo "TESTS += evptest.sh" >> tests/Makefile.am
+echo "TESTS += ssltest.sh" >> tests/Makefile.am
 
 (cd include/openssl
 	cp Makefile.am.tpl Makefile.am
