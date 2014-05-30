@@ -53,7 +53,7 @@ copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	rc2/rc2.h rc4/rc4.h rc5/rc5.h ui/ui_compat.h txt_db/txt_db.h chacha/chacha.h evp/evp.h
 	poly1305/poly1305.h"
 
-copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h kssl.h"
+copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h"
 
 for i in ssl/srtp.h \
 	ssl/ssl_locl.h; do
