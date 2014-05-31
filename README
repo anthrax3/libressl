@@ -26,6 +26,7 @@ http://insanecoding.blogspot.com/2014/04/common-libressl-porting-mistakes.html
 http://insanecoding.blogspot.com/2014/05/a-good-idea-with-bad-usage-devurandom.html
 
 It has been tested to build on:
- Ubuntu 14.04 amd64
+ Ubuntu 14.04 amd64 / armhf
+ Centos 6.5 i686
  FreeBSD 10 amd64
- Mac OS X 10.9.2
+ Mac OS X 10.9.3
