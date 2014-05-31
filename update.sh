@@ -252,12 +252,14 @@ for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
 	cp libssl-regress-openbsd/$i tests
 done
 
+# do not directly run all test programs
+test_excludes=(evptest ssltest http_client)
 (cd tests
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.c|sort`; do
 		TEST=`echo $i|sed -e "s/\.c//"`
-		if [ $TEST != "evptest" -a $TEST != "ssltest" -a $TEST != "http_client" ]; then
-		echo "TESTS += $TEST" >> Makefile.am
+		if ! [[ ${test_excludes[*]} =~ "$TEST" ]]; then
+			echo "TESTS += $TEST" >> Makefile.am
 		fi
 		echo "check_PROGRAMS += $TEST" >> Makefile.am
 		echo "${TEST}_SOURCES = $i" >> Makefile.am
@@ -292,6 +294,8 @@ done
 	done
 )
 
+# do not directly compile C files that are included in other C files
+crypto_excludes=(des/ncbc_enc.c chacha/chacha-merged.c poly1305/poly1305-donna.c)
 (cd crypto
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.c|sort`; do
@@ -302,9 +306,7 @@ done
 	done
 	for subdir in $crypto_subdirs; do
 		for i in `ls -1 $subdir/*.c|sort`; do
-			if [ $i != "des/ncbc_enc.c" -a \
-				 $i != "chacha/chacha-merged.c" -a \
-				 $i != "poly1305/poly1305-donna.c" ]; then
+			if ! [[ ${crypto_excludes[*]} =~ $i ]]; then
 				echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 			fi
 		done
