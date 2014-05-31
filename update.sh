@@ -244,7 +244,7 @@ for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
 	exp/exptest.c hmac/hmactest.c idea/ideatest.c ige/igetest.c md4/md4test.c \
 	md5/md5test.c mdc2/mdc2test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c \
 	rmd/rmdtest.c sha/shatest.c sha1/sha1test.c sha256/sha256test.c \
-	sha512/sha512test.c poly1305/poly1305test.c; do
+	sha512/sha512test.c poly1305/poly1305test.c aeswrap/aes_wrap.c ; do
 	 cp libcrypto-regress-openbsd/$i tests
 done
 
@@ -254,9 +254,9 @@ done
 
 (cd tests
 	cp Makefile.am.tpl Makefile.am
-	for i in `ls -1 *test.c|sort`; do
+	for i in `ls -1 *.c|sort`; do
 		TEST=`echo $i|sed -e "s/\.c//"`
-		if [ $TEST != "evptest" -a $TEST != "ssltest" ]; then
+		if [ $TEST != "evptest" -a $TEST != "ssltest" -a $TEST != "http_client" ]; then
 		echo "TESTS += $TEST" >> Makefile.am
 		fi
 		echo "check_PROGRAMS += $TEST" >> Makefile.am

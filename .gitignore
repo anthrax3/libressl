@@ -38,8 +38,8 @@ Makefile.in
 test-driver
 *.log
 *.trs
-tests/*test
-tests/*test.c
+tests/aes_wrap*
+tests/*test*
 tests/*.pem
 tests/testssl
 
