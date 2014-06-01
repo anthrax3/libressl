@@ -245,7 +245,7 @@ for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
 	md5/md5test.c mdc2/mdc2test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c \
 	rmd/rmdtest.c sha/shatest.c sha1/sha1test.c sha256/sha256test.c \
 	sha512/sha512test.c poly1305/poly1305test.c aeswrap/aes_wrap.c \
-	cts128/cts128test.c ; do
+	cts128/cts128test.c gcm128/gcm128test.c ; do
 	 cp libcrypto-regress-openbsd/$i tests
 done
 
