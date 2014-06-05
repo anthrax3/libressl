@@ -237,6 +237,7 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c
 	testdsa.h testrsa.h timeouts.h ts.c verify.c version.c x509.c"
  
+rm -f tests/*.c
 for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	bn/bntest.c cast/casttest.c chacha/chachatest.c cts128/cts128test.c \
 	des/destest.c dh/dhtest.c dsa/dsatest.c ec/ectest.c ecdh/ecdhtest.c \
