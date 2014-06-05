@@ -2,8 +2,8 @@
 set -e
 
 # resync this library with the upstream project
-#git submodule init
-#git submodule update
+git submodule init
+git submodule update
 
 crypto_subdirs=
 
