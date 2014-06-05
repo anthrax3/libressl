@@ -3,6 +3,7 @@ OpenSSL (https://www.openssl.org/), LibreSSL (http://www.libressl.org/), so
 it is buildable on other systems.
 
 To build, you need autoconf, automake and libtool installed.
+To run all unit tests, you need python installed as well.
 
 Run 'autogen.sh' followed by './configure; make; make check'
 
