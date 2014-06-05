@@ -1,11 +1,11 @@
-AC_INIT([libressl], [24.0])
+AC_INIT([libressl], [24.1])
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 AC_SUBST([USER_CFLAGS], "-O2 $CFLAGS")
-CFLAGS="$CFLAGS -Wall -Werror -std=c99 -g -DHAVE_CRYPTODEV -DLIBRESSL_INTERNAL"
+CFLAGS="$CFLAGS -Wall -Werror -std=c99 -g -Wno-pointer-sign -DHAVE_CRYPTODEV -DLIBRESSL_INTERNAL"
 
 AC_CANONICAL_HOST
 case $host_os in

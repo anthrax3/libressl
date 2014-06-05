@@ -4,14 +4,25 @@ it is buildable on other systems.
 
 To build, you need autoconf, automake and libtool installed.
 
-Run autogen.sh followed by ./configure; make; make check
+Run 'autogen.sh' followed by './configure; make; make check'
 
-Note that multi-threaded builds work as expected. You may need to periodically
-clean up your source tree or rerun autogen.sh/update.sh to get the latest
-source.
+To build a tarball, run 'make dist'
+
+You may need to periodically clean up your source tree or rerun
+autogen.sh/update.sh in order to import the latest source from the git
+submodules.
 
 Warning:
-This is an alpha work-in-progress, not ready for general use.
+This is an alpha work-in-progress, not ready for general use. It is based on
+semi-regular snapshots of the upstream code with minimal patching.
+
+Use it to check application compatibility, security research, code auditing, or
+to just see what the LibreSSL team is up to. Please do not bug the OpenBSD team
+about platform issues you may find with this code unless the fix is generally
+applicable to OpenBSD as well.
+
+Please also read Nick Mathewson's warning on libottery:
+    https://github.com/nmathewson/libottery
 
 Caveat Emptor:
 While this project uses compatibility shims and imports functions from
@@ -19,13 +30,14 @@ OpenBSD's libc and OpenSSH, it will probably never work exactly the same as if
 it is running on OpenBSD.  Until there is an official port of LibreSSL (and
 even after), please conduct your own audits and patches are always welcome.
 
-Luckily there is not much actual code in this port, so it is easy to review.
-See crypto/compat
-
 http://insanecoding.blogspot.com/2014/04/common-libressl-porting-mistakes.html
 http://insanecoding.blogspot.com/2014/05/a-good-idea-with-bad-usage-devurandom.html
 
-It has been tested to build on:
+See crypto/compat for the bulk of the compatibility code. There are also
+a few patches on top of the upstream OpenBSD source, though this project aims
+to keep those at an absolute minimum.
+
+It has been tested to build on these platforms:
  Ubuntu 14.04 amd64 / armhf
  Centos 6.5 i686
  FreeBSD 10 amd64

@@ -39,3 +39,4 @@ libcompat_la_SOURCES += compat/b_print.c
 
 noinst_HEADERS = des/ncbc_enc.c
 libcrypto_la_SOURCES =
+EXTRA_libcrypto_la_SOURCES =

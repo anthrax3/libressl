@@ -2,8 +2,8 @@
 set -e
 
 # resync this library with the upstream project
-git submodule init
-git submodule update
+#git submodule init
+#git submodule update
 
 crypto_subdirs=
 
@@ -143,8 +143,7 @@ copy_crypto ecdsa "ecs_lib.c ecs_asn1.c ecs_ossl.c ecs_sign.c ecs_vrf.c
 copy_crypto engine "eng_err.c eng_lib.c eng_list.c eng_init.c eng_ctrl.c
 	eng_table.c eng_pkey.c eng_fat.c eng_all.c tb_rsa.c tb_dsa.c tb_ecdsa.c
 	tb_dh.c tb_ecdh.c tb_rand.c tb_store.c tb_cipher.c tb_digest.c tb_pkmeth.c
-	tb_asnmth.c eng_openssl.c eng_cnf.c eng_dyn.c eng_rsax.c eng_rdrand.c
-	eng_int.h"
+	tb_asnmth.c eng_openssl.c eng_cnf.c eng_dyn.c eng_rsax.c eng_int.h"
 
 copy_crypto err "err.c err_all.c err_prn.c"
 
@@ -155,7 +154,7 @@ copy_crypto evp "encode.c digest.c evp_enc.c evp_key.c e_des.c e_bf.c
 	p_dec.c bio_md.c bio_b64.c bio_enc.c evp_err.c e_null.c c_all.c c_allc.c
 	c_alld.c evp_lib.c bio_ok.c evp_pkey.c evp_pbe.c p5_crpt.c p5_crpt2.c
 	e_old.c pmeth_lib.c pmeth_fn.c pmeth_gn.c m_sigver.c e_aes_cbc_hmac_sha1.c
-	e_rc4_hmac_md5.c evp_locl.h e_chacha.c"
+	e_rc4_hmac_md5.c evp_locl.h e_chacha.c evp_aead.c e_chacha20poly1305.c"
 
 copy_crypto hmac "hmac.c hm_ameth.c hm_pmeth.c"
 
@@ -237,15 +236,16 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	prime.c progs.h rand.c req.c rsa.c rsautl.c s_apps.h s_cb.c s_client.c
 	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c
 	testdsa.h testrsa.h timeouts.h ts.c verify.c version.c x509.c"
-
-for i in base64/base64test.c bf/bftest.c bn/bntest.c cast/casttest.c \
-	chacha/chachatest.c des/destest.c dh/dhtest.c dsa/dsatest.c ec/ectest.c \
-	ecdh/ecdhtest.c ecdsa/ecdsatest.c engine/enginetest.c evp/evptest.c \
-	exp/exptest.c hmac/hmactest.c idea/ideatest.c ige/igetest.c md4/md4test.c \
-	md5/md5test.c mdc2/mdc2test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c \
-	rmd/rmdtest.c sha/shatest.c sha1/sha1test.c sha256/sha256test.c \
-	sha512/sha512test.c poly1305/poly1305test.c aeswrap/aes_wrap.c \
-	cts128/cts128test.c gcm128/gcm128test.c ; do
+ 
+for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
+	bn/bntest.c cast/casttest.c chacha/chachatest.c cts128/cts128test.c \
+	des/destest.c dh/dhtest.c dsa/dsatest.c ec/ectest.c ecdh/ecdhtest.c \
+	ecdsa/ecdsatest.c engine/enginetest.c evp/evptest.c exp/exptest.c \
+	gcm128/gcm128test.c hmac/hmactest.c idea/ideatest.c ige/igetest.c \
+	md4/md4test.c md5/md5test.c mdc2/mdc2test.c poly1305/poly1305test.c \
+	pqueue/pq_test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c rmd/rmdtest.c \
+	sha/shatest.c sha1/sha1test.c sha256/sha256test.c sha512/sha512test.c \
+	utf8/utf8test.c; do
 	 cp libcrypto-regress-openbsd/$i tests
 done
 
@@ -254,7 +254,7 @@ for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
 done
 
 # do not directly run all test programs
-test_excludes=(evptest ssltest http_client)
+test_excludes=(aeadtest evptest ssltest)
 (cd tests
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.c|sort`; do
@@ -269,9 +269,15 @@ test_excludes=(evptest ssltest http_client)
 	done
 )
 cp libcrypto-regress-openbsd/evp/evptests.txt tests
+cp libcrypto-regress-openbsd/aead/aeadtests.txt tests
 chmod 755 tests/testssl
-echo "TESTS += evptest.sh" >> tests/Makefile.am
-echo "TESTS += ssltest.sh" >> tests/Makefile.am
+for i in "${test_excludes[@]}"; do
+	echo "TESTS += ${i}.sh" >> tests/Makefile.am
+	echo "EXTRA_DIST += ${i}.sh" >> tests/Makefile.am
+done
+echo "EXTRA_DIST += aeadtests.txt" >> tests/Makefile.am
+echo "EXTRA_DIST += evptests.txt" >> tests/Makefile.am
+echo "EXTRA_DIST += testssl ca.pem server.pem" >> tests/Makefile.am
 
 (cd include/openssl
 	cp Makefile.am.tpl Makefile.am
@@ -317,6 +323,9 @@ crypto_excludes=(des/ncbc_enc.c chacha/chacha-merged.c poly1305/poly1305-donna.c
 				echo "noinst_HEADERS += $i" >> Makefile.am
 			done
 		fi
+	done
+	for i in "${crypto_excludes[@]}"; do
+		echo "EXTRA_libcrypto_la_SOURCES += ${i}" >> Makefile.am
 	done
 )
 
