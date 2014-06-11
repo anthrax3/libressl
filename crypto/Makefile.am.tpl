@@ -30,8 +30,6 @@ if NO_REALLOCARRAY
 libcompat_la_SOURCES += compat/reallocarray.c
 endif
 libcompat_la_SOURCES += compat/rand_lib.c
-# disable cryptodev for all OSes
-libcompat_la_SOURCES += compat/hw_cryptodev.c
 
 noinst_HEADERS = des/ncbc_enc.c
 libcrypto_la_SOURCES =
