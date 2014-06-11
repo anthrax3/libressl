@@ -38,11 +38,6 @@ AC_CHECK_FUNC(reallocarray,[AC_SEARCH_LIBS(reallocarray,, [NO_REALLOCARRAY=],
 AC_SUBST(NO_REALLOCARRAY)
 AM_CONDITIONAL(NO_REALLOCARRAY, test "x$NO_REALLOCARRAY" = "xyes")
 
-AC_CHECK_FUNC(bzero,[AC_SEARCH_LIBS(bzero,, [NO_BZERO=],
-			  [NO_BZERO=yes])], [NO_BZERO=yes])
-AC_SUBST(NO_BZERO)
-AM_CONDITIONAL(NO_BZERO, test "x$NO_BZERO" = "xyes")
-
 LT_INIT
 
 ac_configure_args="$ac_configure_args CFLAGS=\"$CFLAGS -DNO_OPENSSL\" LDFLAGS=\"$LDFLAGS -L../crypto\""

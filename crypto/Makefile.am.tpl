@@ -29,9 +29,6 @@ endif
 if NO_REALLOCARRAY
 libcompat_la_SOURCES += compat/reallocarray.c
 endif
-if NO_BZERO
-libcompat_la_SOURCES += compat/bzero.c
-endif
 libcompat_la_SOURCES += compat/rand_lib.c
 # disable cryptodev for all OSes
 libcompat_la_SOURCES += compat/hw_cryptodev.c
