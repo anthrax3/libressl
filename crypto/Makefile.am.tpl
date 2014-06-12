@@ -29,7 +29,9 @@ endif
 if NO_REALLOCARRAY
 libcompat_la_SOURCES += compat/reallocarray.c
 endif
-libcompat_la_SOURCES += compat/rand_lib.c
+if NO_ARC4RANDOM_BUF
+libcompat_la_SOURCES += compat/arc4random.c
+endif
 
 noinst_HEADERS = des/ncbc_enc.c
 libcrypto_la_SOURCES =

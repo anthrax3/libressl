@@ -190,7 +190,7 @@ copy_crypto pkcs7 "pk7_asn1.c pk7_lib.c pkcs7err.c pk7_doit.c pk7_smime.c
 
 copy_crypto poly1305 "poly1305-donna.c poly1305.c"
 
-copy_crypto rand "randfile.c rand_err.c"
+copy_crypto rand "randfile.c rand_err.c rand_lib.c"
 
 copy_crypto rc2 "rc2_ecb.c rc2_skey.c rc2_cbc.c rc2cfb64.c rc2ofb64.c rc2_locl.h"
 

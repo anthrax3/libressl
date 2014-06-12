@@ -41,11 +41,7 @@
 #include <stdint.h>
 
 __BEGIN_DECLS
-uint32_t arc4random();
-void arc4random_stir();
-void arc4random_addrandom(uint8_t *dat, int datlen);
 void arc4random_buf(void *_buf, size_t n);
-uint32_t arc4random_uniform(uint32_t upper_bound);
 void *reallocarray(void *, size_t, size_t);
 __END_DECLS
 
