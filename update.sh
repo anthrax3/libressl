@@ -195,7 +195,7 @@ copy_crypto pkcs7 "pk7_asn1.c pk7_lib.c pkcs7err.c pk7_doit.c pk7_smime.c
 
 copy_crypto poly1305 "poly1305-donna.c poly1305.c"
 
-copy_crypto rand "randfile.c rand_err.c"
+copy_crypto rand "randfile.c rand_err.c rand_lib.c"
 
 copy_crypto rc2 "rc2_ecb.c rc2_skey.c rc2_cbc.c rc2cfb64.c rc2ofb64.c rc2_locl.h"
 
@@ -254,6 +254,7 @@ for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	utf8/utf8test.c; do
 	 cp libcrypto-regress-openbsd/$i tests
 done
+cp libc-regress-openbsd/arc4random-fork/arc4random-fork.c tests/arc4random_fork.c
 cp libc-regress-openbsd/timingsafe/timingsafe.c tests
 
 for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
