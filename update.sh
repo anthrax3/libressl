@@ -5,6 +5,12 @@ set -e
 git submodule init
 git submodule update
 
+source libssl-openbsd/ssl/shlib_version
+version=$major.$minor
+echo libressl version $version
+
+sed -e "s/version/${version}/" configure.ac.tpl > configure.ac
+
 crypto_subdirs=
 
 copy_src() {

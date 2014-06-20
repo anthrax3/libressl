@@ -1,4 +1,4 @@
-AC_INIT([libressl], [24.1])
+AC_INIT([libressl], [version])
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
 
