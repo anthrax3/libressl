@@ -249,7 +249,7 @@ for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	ecdsa/ecdsatest.c engine/enginetest.c evp/evptest.c exp/exptest.c \
 	gcm128/gcm128test.c hmac/hmactest.c idea/ideatest.c ige/igetest.c \
 	md4/md4test.c md5/md5test.c mdc2/mdc2test.c poly1305/poly1305test.c \
-	rand/randtest.c rc2/rc2test.c rc4/rc4test.c rmd/rmdtest.c \
+	pqueue/pq_test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c rmd/rmdtest.c \
 	sha/shatest.c sha1/sha1test.c sha256/sha256test.c sha512/sha512test.c \
 	utf8/utf8test.c; do
 	 cp libcrypto-regress-openbsd/$i tests
@@ -263,7 +263,7 @@ for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
 done
 
 # do not directly run all test programs
-test_excludes=(aeadtest evptest ssltest)
+test_excludes=(aeadtest evptest pq_test ssltest)
 (cd tests
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.c|sort`; do
@@ -273,12 +273,13 @@ test_excludes=(aeadtest evptest ssltest)
 		fi
 		echo "check_PROGRAMS += $TEST" >> Makefile.am
 		echo "${TEST}_SOURCES = $i" >> Makefile.am
-		echo "${TEST}_LDADD = \$(top_builddir)/crypto/libcrypto.la" >> Makefile.am
-		echo "${TEST}_LDADD += \$(top_builddir)/ssl/libssl.la" >> Makefile.am
+		echo "${TEST}_LDADD = \$(top_builddir)/ssl/libssl.la" >> Makefile.am
+		echo "${TEST}_LDADD += \$(top_builddir)/crypto/libcrypto.la" >> Makefile.am
 	done
 )
 cp libcrypto-regress-openbsd/evp/evptests.txt tests
 cp libcrypto-regress-openbsd/aead/aeadtests.txt tests
+cp libcrypto-regress-openbsd/pqueue/expected.txt tests/pq_expected.txt
 chmod 755 tests/testssl
 for i in "${test_excludes[@]}"; do
 	echo "TESTS += ${i}.sh" >> tests/Makefile.am
@@ -286,6 +287,7 @@ for i in "${test_excludes[@]}"; do
 done
 echo "EXTRA_DIST += aeadtests.txt" >> tests/Makefile.am
 echo "EXTRA_DIST += evptests.txt" >> tests/Makefile.am
+echo "EXTRA_DIST += pq_expected.txt" >> tests/Makefile.am
 echo "EXTRA_DIST += testssl ca.pem server.pem" >> tests/Makefile.am
 
 (cd include/openssl
