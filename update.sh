@@ -255,6 +255,7 @@ for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	 cp libcrypto-regress-openbsd/$i tests
 done
 cp libc-regress-openbsd/arc4random-fork/arc4random-fork.c tests/arc4random_fork.c
+cp libc-regress-openbsd/explicit_bzero/explicit_bzero.c tests
 cp libc-regress-openbsd/timingsafe/timingsafe.c tests
 
 for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
