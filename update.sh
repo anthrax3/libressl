@@ -33,6 +33,11 @@ cp libcrypto-openbsd/crypto/arch/amd64/opensslconf.h include/openssl
 cp libssl-openbsd/src/e_os2.h include/openssl
 cp libssl-openbsd/src/ssl/pqueue.h include
 
+for i in strlcpy.c strlcat.c timingsafe_bcmp.c timingsafe_memcmp.c; do
+	cp libc-openbsd/string/$i crypto/compat
+done
+cp libc-openbsd/stdlib/reallocarray.c crypto/compat
+
 (cd ./libssl-openbsd/src/crypto/objects/;
 	perl objects.pl objects.txt obj_mac.num obj_mac.h;
 	perl obj_dat.pl obj_mac.h obj_dat.h )
@@ -249,6 +254,7 @@ for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	utf8/utf8test.c; do
 	 cp libcrypto-regress-openbsd/$i tests
 done
+cp libc-regress-openbsd/timingsafe/timingsafe.c tests
 
 for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
 	cp libssl-regress-openbsd/$i tests
@@ -288,8 +294,15 @@ echo "EXTRA_DIST += testssl ca.pem server.pem" >> tests/Makefile.am
 )
 
 # remove unsupported __bounded__ attributes
-for i in include/openssl/bio.h crypto/chacha/chacha-merged.c; do
-	sed -ie 's/__attribute__((__bounded__.*/;/' $i
+bounded_excludes=(
+	include/openssl/bio.h
+	include/openssl/buffer.h
+	include/openssl/md5.h
+	include/openssl/sha.h
+	crypto/chacha/chacha-merged.c
+	)
+for i in "${bounded_excludes[@]}"; do
+	sed -ie 's/__attribute__.*((__bounded__.*/;/' $i
 done
 
 (cd ssl
@@ -303,7 +316,11 @@ done
 )
 
 # do not directly compile C files that are included in other C files
-crypto_excludes=(des/ncbc_enc.c chacha/chacha-merged.c poly1305/poly1305-donna.c)
+crypto_excludes=(
+	des/ncbc_enc.c
+	chacha/chacha-merged.c
+	poly1305/poly1305-donna.c
+	)
 (cd crypto
 	cp Makefile.am.tpl Makefile.am
 	for i in `ls -1 *.c|sort`; do

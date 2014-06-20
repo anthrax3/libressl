@@ -14,3 +14,9 @@
 [submodule "libssl-regress-openbsd"]
 	path = libssl-regress-openbsd
 	url = https://github.com/busterb/libssl-regress-openbsd.git
+[submodule "libc-openbsd"]
+	path = libc-openbsd
+	url = https://github.com/busterb/libc-openbsd.git
+[submodule "libc-regress-openbsd"]
+	path = libc-regress-openbsd
+	url = https://github.com/busterb/libc-regress-openbsd.git

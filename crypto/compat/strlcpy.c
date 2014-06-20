@@ -1,4 +1,4 @@
-/*	$OpenBSD: strlcpy.c,v 1.10 2005/08/08 08:05:37 espie Exp $	*/
+/*	$OpenBSD: src/lib/libc/string/strlcpy.c,v 1.11 2006/05/05 15:27:38 millert Exp $	*/
 
 /*
  * Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>

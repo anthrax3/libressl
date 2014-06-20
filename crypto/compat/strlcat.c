@@ -1,4 +1,4 @@
-/*	$OpenBSD: strlcat.c,v 1.12 2005/03/30 20:13:52 otto Exp $	*/
+/*	$OpenBSD: src/lib/libc/string/strlcat.c,v 1.13 2005/08/08 08:05:37 espie Exp $	*/
 
 /*
  * Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>

@@ -40,7 +40,8 @@ __BEGIN_DECLS
 size_t strlcpy(char *dst, const char *src, size_t siz);
 size_t strlcat(char *dst, const char *src, size_t siz);
 void explicit_bzero(void *, size_t);
-void bzero(void *s, size_t n);
+int timingsafe_bcmp(const void *b1, const void *b2, size_t n);
+int timingsafe_memcmp(const void *b1, const void *b2, size_t len);
 __END_DECLS
 
 #endif

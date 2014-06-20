@@ -29,6 +29,12 @@ endif
 if NO_REALLOCARRAY
 libcompat_la_SOURCES += compat/reallocarray.c
 endif
+if NO_TIMINGSAFE_MEMCMP
+libcompat_la_SOURCES += compat/timingsafe_memcmp.c
+endif
+if NO_TIMINGSAFE_BCMP
+libcompat_la_SOURCES += compat/timingsafe_bcmp.c
+endif
 libcompat_la_SOURCES += compat/rand_lib.c
 
 noinst_HEADERS = des/ncbc_enc.c

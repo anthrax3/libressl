@@ -39,9 +39,11 @@ test-driver
 *.log
 *.trs
 tests/aes_wrap*
+tests/timingsafe*
 tests/*test*
 tests/*.pem
 tests/testssl
+tests/*.txt
 
 # ctags stuff
 TAGS
@@ -90,6 +92,11 @@ apps/*.c
 apps/*.h
 apps/*.cnf
 apps/openssl
+
+crypto/compat/strlcat.c
+crypto/compat/strlcpy.c
+crypto/compat/timingsafe_bcmp.c
+crypto/compat/timingsafe_memcmp.c
 
 crypto/aes/
 crypto/asn1/
@@ -154,6 +161,3 @@ crypto/whrlpool/
 crypto/x509/
 crypto/x509v3/
 
-tests/http_client.exe
-tests/http_client
-tests/evptests.txt
