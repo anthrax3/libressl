@@ -96,6 +96,7 @@ apps/*.h
 apps/*.cnf
 apps/openssl
 
+crypto/compat/reallocarray.c
 crypto/compat/strlcat.c
 crypto/compat/strlcpy.c
 crypto/compat/timingsafe_bcmp.c
