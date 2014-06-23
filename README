@@ -43,3 +43,8 @@ It has been tested to build on these platforms:
  Centos 6.5 i686
  FreeBSD 10 amd64
  Mac OS X 10.9.3
+
+<a href="https://scan.coverity.com/projects/2493">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/2493/badge.svg"/>
+</a>
