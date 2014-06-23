@@ -38,6 +38,9 @@ endif
 if NO_ARC4RANDOM_BUF
 libcompat_la_SOURCES += compat/arc4random.c
 endif
+if NO_ISSETUGID
+libcompat_la_SOURCES += compat/issetugid.c
+endif
 
 noinst_HEADERS = des/ncbc_enc.c
 libcrypto_la_SOURCES =
