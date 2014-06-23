@@ -250,7 +250,8 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 
 rm -f tests/*.c
 for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
-	bn/bntest.c cast/casttest.c chacha/chachatest.c cts128/cts128test.c \
+	bio/biotest.c bn/general/bntest.c bn/mont/mont.c \
+	cast/casttest.c chacha/chachatest.c cts128/cts128test.c \
 	des/destest.c dh/dhtest.c dsa/dsatest.c ec/ectest.c ecdh/ecdhtest.c \
 	ecdsa/ecdsatest.c engine/enginetest.c evp/evptest.c exp/exptest.c \
 	gcm128/gcm128test.c hmac/hmactest.c idea/ideatest.c ige/igetest.c \
