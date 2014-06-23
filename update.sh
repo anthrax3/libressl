@@ -5,7 +5,14 @@ set -e
 git submodule init
 git submodule update
 
-source libssl-openbsd/ssl/shlib_version
+libssl_src=openbsd/libssl
+libssl_regress=openbsd/libssl-regress
+libc_src=openbsd/libc
+libc_regress=openbsd/libc-regress
+libcrypto_src=openbsd/libcrypto
+libcrypto_regress=openbsd/libcrypto-regress
+
+source $libssl_src/ssl/shlib_version
 version=$major.$minor
 echo libressl version $version
 
@@ -17,13 +24,13 @@ copy_src() {
 	mkdir -p $1
 	rm -f $1/*.c
 	for file in $2; do
-		cp libssl-openbsd/src/$1/$file $1
+		cp $libssl_src/src/$1/$file $1
 	done
 }
 
 copy_hdrs() {
 	for file in $2; do
-		cp libssl-openbsd/src/$1/$file include/openssl
+		cp $libssl_src/src/$1/$file include/openssl
 	done
 }
 
@@ -32,24 +39,24 @@ copy_crypto() {
 	crypto_subdirs="$crypto_subdirs $1"
 }
 
-cp libssl-openbsd/src/LICENSE COPYING
-cp libssl-openbsd/src/CHANGES ChangeLog
+cp $libssl_src/src/LICENSE COPYING
+cp $libssl_src/src/CHANGES ChangeLog
 
-cp libcrypto-openbsd/crypto/arch/amd64/opensslconf.h include/openssl
-cp libssl-openbsd/src/e_os2.h include/openssl
-cp libssl-openbsd/src/ssl/pqueue.h include
+cp $libcrypto_src/crypto/arch/amd64/opensslconf.h include/openssl
+cp $libssl_src/src/e_os2.h include/openssl
+cp $libssl_src/src/ssl/pqueue.h include
 
 for i in explicit_bzero.c strlcpy.c strlcat.c timingsafe_bcmp.c timingsafe_memcmp.c; do
-	cp libc-openbsd/string/$i crypto/compat
+	cp $libc_src/string/$i crypto/compat
 done
-cp libc-openbsd/stdlib/reallocarray.c crypto/compat
+cp $libc_src/stdlib/reallocarray.c crypto/compat
 
-(cd ./libssl-openbsd/src/crypto/objects/;
+(cd ./$libssl_src/src/crypto/objects/;
 	perl objects.pl objects.txt obj_mac.num obj_mac.h;
 	perl obj_dat.pl obj_mac.h obj_dat.h )
 mkdir -p include/openssl crypto/objects
-mv libssl-openbsd/src/crypto/objects/obj_mac.h ./include/openssl/obj_mac.h
-mv libssl-openbsd/src/crypto/objects/obj_dat.h ./crypto/objects/obj_dat.h
+mv $libssl_src/src/crypto/objects/obj_mac.h ./include/openssl/obj_mac.h
+mv $libssl_src/src/crypto/objects/obj_dat.h ./crypto/objects/obj_dat.h
 
 copy_hdrs crypto "stack/stack.h lhash/lhash.h stack/safestack.h opensslv.h
 	ossl_typ.h err/err.h crypto.h comp/comp.h x509/x509.h buffer/buffer.h
@@ -68,7 +75,7 @@ copy_hdrs ssl "srtp.h ssl.h ssl2.h ssl3.h ssl23.h tls1.h dtls1.h"
 
 for i in ssl/srtp.h \
 	ssl/ssl_locl.h; do
-	cp libssl-openbsd/src/$i ssl
+	cp $libssl_src/src/$i ssl
 done
 
 copy_src ssl "s3_meth.c s3_srvr.c s3_clnt.c s3_lib.c s3_enc.c s3_pkt.c
@@ -259,14 +266,14 @@ for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	pqueue/pq_test.c rand/randtest.c rc2/rc2test.c rc4/rc4test.c rmd/rmdtest.c \
 	sha/shatest.c sha1/sha1test.c sha256/sha256test.c sha512/sha512test.c \
 	utf8/utf8test.c; do
-	 cp libcrypto-regress-openbsd/$i tests
+	 cp $libcrypto_regress/$i tests
 done
-cp libc-regress-openbsd/arc4random-fork/arc4random-fork.c tests/arc4random_fork.c
-cp libc-regress-openbsd/explicit_bzero/explicit_bzero.c tests
-cp libc-regress-openbsd/timingsafe/timingsafe.c tests
+cp $libc_regress/arc4random-fork/arc4random-fork.c tests/arc4random_fork.c
+cp $libc_regress/explicit_bzero/explicit_bzero.c tests
+cp $libc_regress/timingsafe/timingsafe.c tests
 
 for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
-	cp libssl-regress-openbsd/$i tests
+	cp $libssl_regress/$i tests
 done
 
 # do not directly run all test programs
@@ -284,9 +291,9 @@ test_excludes=(aeadtest evptest pq_test ssltest)
 		echo "${TEST}_LDADD += \$(top_builddir)/crypto/libcrypto.la" >> Makefile.am
 	done
 )
-cp libcrypto-regress-openbsd/evp/evptests.txt tests
-cp libcrypto-regress-openbsd/aead/aeadtests.txt tests
-cp libcrypto-regress-openbsd/pqueue/expected.txt tests/pq_expected.txt
+cp $libcrypto_regress/evp/evptests.txt tests
+cp $libcrypto_regress/aead/aeadtests.txt tests
+cp $libcrypto_regress/pqueue/expected.txt tests/pq_expected.txt
 chmod 755 tests/testssl
 for i in "${test_excludes[@]}"; do
 	echo "TESTS += ${i}.sh" >> tests/Makefile.am
