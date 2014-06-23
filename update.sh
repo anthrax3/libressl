@@ -39,7 +39,7 @@ cp libcrypto-openbsd/crypto/arch/amd64/opensslconf.h include/openssl
 cp libssl-openbsd/src/e_os2.h include/openssl
 cp libssl-openbsd/src/ssl/pqueue.h include
 
-for i in strlcpy.c strlcat.c timingsafe_bcmp.c timingsafe_memcmp.c; do
+for i in explicit_bzero.c strlcpy.c strlcat.c timingsafe_bcmp.c timingsafe_memcmp.c; do
 	cp libc-openbsd/string/$i crypto/compat
 done
 cp libc-openbsd/stdlib/reallocarray.c crypto/compat
@@ -247,7 +247,7 @@ copy_src apps "apps.c apps.h asn1pars.c ca.c ciphers.c cms.c crl.c crl2p7.c
 	prime.c progs.h rand.c req.c rsa.c rsautl.c s_apps.h s_cb.c s_client.c
 	s_server.c s_socket.c s_time.c sess_id.c smime.c speed.c spkac.c
 	testdsa.h testrsa.h timeouts.h ts.c verify.c version.c x509.c"
- 
+
 rm -f tests/*.c
 for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	bn/bntest.c cast/casttest.c chacha/chachatest.c cts128/cts128test.c \

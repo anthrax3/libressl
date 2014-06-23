@@ -1,16 +1,19 @@
-/* $NetBSD: explicit_bzero.c,v 1.1 2012/08/30 12:16:49 drochner Exp $ */
+/*	$OpenBSD: src/lib/libc/string/explicit_bzero.c,v 1.3 2014/06/21 02:34:26 matthew Exp $ */
+/*
+ * Public domain.
+ * Written by Matthew Dempsky.
+ */
 
 #include <string.h>
 
-/*
- * The use of a volatile pointer guarantees that the compiler
- * will not optimise the call away.
- */
-void *(* volatile explicit_memset_impl)(void *, int, size_t) = memset;
+__attribute__((weak)) void
+__explicit_bzero_hook(void *buf, size_t len)
+{
+}
 
 void
-explicit_bzero(void *b, size_t len)
+explicit_bzero(void *buf, size_t len)
 {
-
-	(*explicit_memset_impl)(b, 0, len);
+	memset(buf, 0, len);
+	__explicit_bzero_hook(buf, len);
 }
