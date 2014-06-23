@@ -17,9 +17,9 @@
 int issetugid(void)
 {
 #ifdef HAVE_GETAUXVAL
-	if (getauxval(AT_SECURE) != 0) {
-		return 1;
+	if (getauxval(AT_SECURE) == 0) {
+		return 0;
 	}
 #endif
-	return (getuid() != geteuid()) || (getgid() != getegid());
+	return 1;
 }
