@@ -8,7 +8,7 @@ lib_LTLIBRARIES = libcrypto.la
 
 libcrypto_la_LIBADD = libcompat.la libcompatnoopt.la
 libcrypto_la_LIBADD += $(top_builddir)/libottery/libottery.la
-libcrypto_la_LDFLAGS = -version-info 1:1:0
+libcrypto_la_LDFLAGS = -version-info libcrypto-version
 libcrypto_la_CFLAGS = $(CFLAGS) $(USER_CFLAGS) -DOPENSSL_NO_HW_PADLOCK
 
 noinst_LTLIBRARIES = libcompat.la libcompatnoopt.la

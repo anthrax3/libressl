@@ -14,10 +14,12 @@ libcrypto_src=openbsd/libcrypto
 libcrypto_regress=openbsd/libcrypto-regress
 
 source $libssl_src/ssl/shlib_version
-version=$major.$minor
-echo libressl version $version
+libssl_version=$major:$minor:0
+echo libssl version $libssl_version
 
-sed -e "s/version/${version}/" configure.ac.tpl > configure.ac
+source $libcrypto_src/crypto/shlib_version
+libcrypto_version=$major:$minor:0
+echo libcrypto version $libcrypto_version
 
 crypto_subdirs=
 
@@ -171,7 +173,7 @@ copy_crypto evp "encode.c digest.c evp_enc.c evp_key.c e_des.c e_bf.c
 	m_null.c m_md4.c m_md5.c m_sha.c m_sha1.c m_wp.c m_dss.c m_dss1.c m_mdc2.c
 	m_ripemd.c m_ecdsa.c p_open.c p_seal.c p_sign.c p_verify.c p_lib.c p_enc.c
 	p_dec.c bio_md.c bio_b64.c bio_enc.c evp_err.c e_null.c c_all.c c_allc.c
-	c_alld.c evp_lib.c bio_ok.c evp_pkey.c evp_pbe.c p5_crpt.c p5_crpt2.c
+	c_alld.c evp_lib.c evp_pkey.c evp_pbe.c p5_crpt.c p5_crpt2.c
 	e_old.c pmeth_lib.c pmeth_fn.c pmeth_gn.c m_sigver.c e_aes_cbc_hmac_sha1.c
 	e_rc4_hmac_md5.c evp_locl.h e_chacha.c evp_aead.c e_chacha20poly1305.c"
 
@@ -281,6 +283,7 @@ done
 test_excludes=(aeadtest evptest pq_test ssltest)
 (cd tests
 	cp Makefile.am.tpl Makefile.am
+
 	for i in `ls -1 *.c|sort`; do
 		TEST=`echo $i|sed -e "s/\.c//"`
 		if ! [[ ${test_excludes[*]} =~ "$TEST" ]]; then
@@ -325,7 +328,7 @@ for i in "${bounded_excludes[@]}"; do
 done
 
 (cd ssl
-	cp Makefile.am.tpl Makefile.am
+	sed -e "s/libssl-version/${libssl_version}/" Makefile.am.tpl > Makefile.am
 	for i in `ls -1 *.c|sort`; do
 		echo "libssl_la_SOURCES += $i" >> Makefile.am
 	done
@@ -341,7 +344,7 @@ crypto_excludes=(
 	poly1305/poly1305-donna.c
 	)
 (cd crypto
-	cp Makefile.am.tpl Makefile.am
+	sed -e "s/libcrypto-version/${libcrypto_version}/" Makefile.am.tpl > Makefile.am
 	for i in `ls -1 *.c|sort`; do
 		echo "libcrypto_la_SOURCES += $i" >> Makefile.am
 	done
