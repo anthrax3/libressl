@@ -96,7 +96,9 @@ apps/*.h
 apps/*.cnf
 apps/openssl
 
+crypto/compat/chacha_private.h
 crypto/compat/explicit_bzero.c
+crypto/compat/getentropy_linux.c
 crypto/compat/reallocarray.c
 crypto/compat/strlcat.c
 crypto/compat/strlcpy.c

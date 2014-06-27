@@ -1,2 +1,2 @@
-SUBDIRS = libottery crypto ssl include apps tests
+SUBDIRS = crypto ssl include apps tests
 ACLOCAL_AMFLAGS = -I m4

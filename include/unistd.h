@@ -9,6 +9,7 @@
 #define LIBBSD_UNISTD_H
 
 __BEGIN_DECLS
+int getentropy(void *buf, size_t buflen);
 int issetugid(void);
 __END_DECLS
 

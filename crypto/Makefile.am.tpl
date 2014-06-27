@@ -7,7 +7,6 @@ AM_CPPFLAGS += -I$(top_srcdir)/crypto/modes
 lib_LTLIBRARIES = libcrypto.la
 
 libcrypto_la_LIBADD = libcompat.la libcompatnoopt.la
-libcrypto_la_LIBADD += $(top_builddir)/libottery/libottery.la
 libcrypto_la_LDFLAGS = -version-info libcrypto-version
 libcrypto_la_CFLAGS = $(CFLAGS) $(USER_CFLAGS) -DOPENSSL_NO_HW_PADLOCK
 
@@ -37,6 +36,7 @@ libcompat_la_SOURCES += compat/timingsafe_bcmp.c
 endif
 if NO_ARC4RANDOM_BUF
 libcompat_la_SOURCES += compat/arc4random.c
+libcompat_la_SOURCES += compat/getentropy_linux.c
 endif
 if NO_ISSETUGID
 libcompat_la_SOURCES += compat/issetugid.c

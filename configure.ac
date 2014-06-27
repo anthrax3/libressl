@@ -65,6 +65,5 @@ AC_CHECK_FUNC(funopen, AC_DEFINE(HAVE_FUNOPEN))
 LT_INIT
 
 ac_configure_args="$ac_configure_args CFLAGS=\"$CFLAGS -DNO_OPENSSL\" LDFLAGS=\"$LDFLAGS -L../crypto\""
-AC_CONFIG_SUBDIRS([libottery])
 AC_OUTPUT(Makefile include/Makefile include/openssl/Makefile ssl/Makefile
           crypto/Makefile tests/Makefile apps/Makefile)

@@ -53,6 +53,9 @@ for i in explicit_bzero.c strlcpy.c strlcat.c timingsafe_bcmp.c timingsafe_memcm
 	cp $libc_src/string/$i crypto/compat
 done
 cp $libc_src/stdlib/reallocarray.c crypto/compat
+cp $libc_src/crypt/arc4random.c crypto/compat
+cp $libc_src/crypt/chacha_private.h crypto/compat
+cp $libcrypto_src/crypto/getentropy_linux.c crypto/compat
 
 (cd ./$libssl_src/src/crypto/objects/;
 	perl objects.pl objects.txt obj_mac.num obj_mac.h;
