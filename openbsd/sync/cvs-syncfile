@@ -1,0 +1,12 @@
+config {
+	#hostname anoncvs.eu.openbsd.org
+	hostname anoncvs.usa.openbsd.org
+	#compress
+	collection {
+		name openbsd-src
+		release rcs
+		prefix /Users/brent/projects/openbsd/cvs
+		refuse /Users/brent/projects/openbsd/refuse
+		umask 002
+	}
+}
