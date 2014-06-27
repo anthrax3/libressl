@@ -424,6 +424,8 @@ run_options.set_project(
         # expression that has to match the *whole* CVS symbol name:
         #IgnoreSymbolTransform(r'nightly-build-tag-.*')
         IgnoreSymbolTransform(r'netbsd_1_1'),
+        IgnoreSymbolTransform(r'SSLeay'),
+        IgnoreSymbolTransform(r'OPENSSL'),
 
         # RegexpSymbolTransforms transform symbols textually using a
         # regular expression.  The first argument is a Python regular

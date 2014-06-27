@@ -5,8 +5,8 @@ config {
 	collection {
 		name openbsd-src
 		release rcs
-		prefix /Users/brent/projects/openbsd/cvs
-		refuse /Users/brent/projects/openbsd/refuse
+		prefix /Users/brent/projects/libressl/openbsd/sync/cvs
+		refuse /Users/brent/projects/libressl/openbsd/sync/refuse
 		umask 002
 	}
 }

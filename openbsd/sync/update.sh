@@ -1,7 +1,9 @@
 #!/bin/sh
 
+set -e
+
 # grab the latest openbsd-src
-mkdir -p cvs
+mkdir -p cvs/CVSROOT
 cvsync -c cvs-syncfile
 
 # remove duplicate Attic files
