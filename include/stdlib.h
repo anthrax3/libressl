@@ -44,6 +44,7 @@ __BEGIN_DECLS
 uint32_t arc4random(void);
 void arc4random_buf(void *_buf, size_t n);
 void *reallocarray(void *, size_t, size_t);
+long long strtonum(const char *nptr, long long minval, long long maxval, const char **errstr);
 __END_DECLS
 
 #endif

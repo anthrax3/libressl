@@ -41,6 +41,9 @@ endif
 if NO_ISSETUGID
 libcompat_la_SOURCES += compat/issetugid_linux.c
 endif
+if NO_STRTONUM
+libcompat_la_SOURCES += compat/strtonum.c
+endif
 
 noinst_HEADERS = des/ncbc_enc.c
 libcrypto_la_SOURCES =

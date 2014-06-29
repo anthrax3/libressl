@@ -103,6 +103,7 @@ crypto/compat/getentropy_linux.c
 crypto/compat/reallocarray.c
 crypto/compat/strlcat.c
 crypto/compat/strlcpy.c
+crypto/compat/strtonum.c
 crypto/compat/timingsafe_bcmp.c
 crypto/compat/timingsafe_memcmp.c
 
