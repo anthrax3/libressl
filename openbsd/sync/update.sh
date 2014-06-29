@@ -17,7 +17,7 @@ rm -f cvs/src/lib/libssl/src/doc/crypto/Attic/bio.pod,v \
 # build and checkout the git repository
 rm -fr cvs2git-tmp
 cvs2git --options cvs2git.options --fallback-encoding utf-8
-rm -f openbsd-src.git
+rm -fr openbsd-src.git
 mkdir openbsd-src.git
 (cd openbsd-src.git
  git init --bare
