@@ -39,7 +39,7 @@ libcompat_la_SOURCES += compat/arc4random.c
 libcompat_la_SOURCES += compat/getentropy_linux.c
 endif
 if NO_ISSETUGID
-libcompat_la_SOURCES += compat/issetugid.c
+libcompat_la_SOURCES += compat/issetugid_linux.c
 endif
 
 noinst_HEADERS = des/ncbc_enc.c
