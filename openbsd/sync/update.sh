@@ -34,12 +34,12 @@ for dir in libc libssl libcrypto; do
     cp -a openbsd-src ${dir}-regress-openbsd
     (cd ${dir}-openbsd;
     git filter-branch --prune-empty --subdirectory-filter src/lib/${dir} HEAD
-    git remote add github https://github.com/busterb/${dir}-openbsd.git
+    git remote add github git@github.com:busterb/${dir}-openbsd.git
     git push -f github master
     )
     (cd ${dir}-regress-openbsd;
     git filter-branch --prune-empty --subdirectory-filter src/regress/lib/${dir} HEAD
-    git remote add github https://github.com/busterb/${dir}-regress-openbsd.git
+    git remote add github git@github.com:busterb/${dir}-regress-openbsd.git
     git push -f github master
     )
 done
