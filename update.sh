@@ -56,7 +56,7 @@ cp $libc_src/stdlib/reallocarray.c crypto/compat
 cp $libc_src/stdlib/strtonum.c crypto/compat
 cp $libc_src/crypt/arc4random.c crypto/compat
 cp $libc_src/crypt/chacha_private.h crypto/compat
-cp $libcrypto_src/crypto/getentropy_linux.c crypto/compat
+cp $libcrypto_src/crypto/getentropy_*.c crypto/compat
 
 (cd ./$libssl_src/src/crypto/objects/;
 	perl objects.pl objects.txt obj_mac.num obj_mac.h;
@@ -141,9 +141,9 @@ copy_crypto conf "conf_err.c conf_lib.c conf_api.c conf_def.c conf_mod.c
 
 copy_crypto des "cbc_cksm.c cbc_enc.c cfb64enc.c cfb_enc.c ecb3_enc.c
 	ecb_enc.c  enc_read.c enc_writ.c fcrypt.c fcrypt_b.c ofb64enc.c ofb_enc.c
-	pcbc_enc.c qud_cksm.c rand_key.c rpc_enc.c  set_key.c xcbc_enc.c str2key.c
+	pcbc_enc.c qud_cksm.c rand_key.c set_key.c xcbc_enc.c str2key.c
 	cfb64ede.c ofb64ede.c ede_cbcm_enc.c des_enc.c des_locl.h ncbc_enc.c
-	des_ver.h rpc_des.h spr.h"
+	spr.h"
 
 copy_crypto dh "dh_asn1.c dh_gen.c dh_key.c dh_lib.c dh_check.c dh_err.c
 	dh_depr.c dh_ameth.c dh_pmeth.c dh_prn.c"
@@ -224,7 +224,7 @@ copy_crypto rc4 "rc4_enc.c rc4_skey.c rc4_utl.c rc4_locl.h"
 copy_crypto ripemd "rmd_dgst.c rmd_one.c rmd_locl.h rmdconst.h"
 
 copy_crypto rsa "rsa_eay.c rsa_gen.c rsa_lib.c rsa_sign.c rsa_saos.c rsa_err.c
-	rsa_pk1.c rsa_ssl.c rsa_none.c rsa_oaep.c rsa_chk.c rsa_null.c rsa_pss.c
+	rsa_pk1.c rsa_ssl.c rsa_none.c rsa_oaep.c rsa_chk.c rsa_pss.c
 	rsa_x931.c rsa_asn1.c rsa_depr.c rsa_ameth.c rsa_prn.c rsa_pmeth.c
 	rsa_crpt.c rsa_locl.h"
 
