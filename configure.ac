@@ -1,4 +1,5 @@
 AC_INIT([libressl], [1.0.0])
+AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -7,16 +8,22 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_SUBST([USER_CFLAGS], "-O2 $CFLAGS")
 CFLAGS="$CFLAGS -Wall -Werror -std=c99 -g -Wno-pointer-sign -DHAVE_CRYPTODEV -DLIBRESSL_INTERNAL"
 
-AC_CANONICAL_HOST
-case $host_os in
+case $target_os in
 	*darwin*)
+		TARGET_OS=darwin;
 		LDFLAGS="$LDFLAGS -Qunused-arguments" ;;
 	*linux*)
+		TARGET_OS=linux;
 		CFLAGS="$CFLAGS -D_BSD_SOURCE -D_POSIX_SOURCE -D_GNU_SOURCE" ;;
 	*solaris*)
+		TARGET_OS=solaris;
 		CFLAGS="$CFLAGS -D__EXTENSIONS__" ;;
 	*) ;;
 esac
+
+AM_CONDITIONAL(TARGET_DARWIN, test x$TARGET_OS = xdarwin)
+AM_CONDITIONAL(TARGET_LINUX, test x$TARGET_OS = xlinux)
+AM_CONDITIONAL(TARGET_SOLARIS, test x$TARGET_OS = xsolaris)
 
 AC_PROG_CC
 AC_PROG_LIBTOOL
@@ -52,6 +59,17 @@ AC_CHECK_FUNC(arc4random_buf,[AC_SEARCH_LIBS(write,, [NO_ARC4RANDOM_BUF=],
 			  [NO_ARC4RANDOM_BUF=yes])], [NO_ARC4RANDOM_BUF=yes])
 AC_SUBST(NO_ARC4RANDOM_BUF)
 AM_CONDITIONAL(NO_ARC4RANDOM_BUF, test "x$NO_ARC4RANDOM_BUF" = "xyes")
+
+# overrides for arc4random_buf implementations with known issues
+AM_CONDITIONAL(NO_ARC4RANDOM_BUF,
+   test x$TARGET_OS = xdarwin \
+     -o x$TARGET_OS = xsolaris \
+	 -o x$NO_ARC4RANDOM_BUF = xyes)
+
+AC_CHECK_FUNC(getentropy,[AC_SEARCH_LIBS(write,, [NO_GETENTROPY=],
+			  [NO_GETENTROPY=yes])], [NO_GETENTROPY=yes])
+AC_SUBST(NO_GETENTROPY)
+AM_CONDITIONAL(NO_GETENTROPY, test "x$NO_GETENTROPY" = "xyes")
 
 AC_CHECK_FUNC(issetugid,[AC_SEARCH_LIBS(write,, [NO_ISSETUGID=],
 			  [NO_ISSETUGID=yes])], [NO_ISSETUGID=yes])
