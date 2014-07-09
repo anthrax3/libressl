@@ -11,13 +11,17 @@ CFLAGS="$CFLAGS -Wall -Werror -std=c99 -g -Wno-pointer-sign -DHAVE_CRYPTODEV -DL
 case $target_os in
 	*darwin*)
 		TARGET_OS=darwin;
-		LDFLAGS="$LDFLAGS -Qunused-arguments" ;;
+		LDFLAGS="$LDFLAGS -Qunused-arguments"
+		;;
 	*linux*)
 		TARGET_OS=linux;
-		CFLAGS="$CFLAGS -D_BSD_SOURCE -D_POSIX_SOURCE -D_GNU_SOURCE" ;;
+		CFLAGS="$CFLAGS -D_BSD_SOURCE -D_POSIX_SOURCE -D_GNU_SOURCE"
+		;;
 	*solaris*)
 		TARGET_OS=solaris;
-		CFLAGS="$CFLAGS -D__EXTENSIONS__" ;;
+		CFLAGS="$CFLAGS -D__EXTENSIONS__ -D_XOPEN_SOURCE=600 -DBSD_COMP"
+		AC_SUBST([PLATFORM_LDADD], ['-lnsl -lsocket'])
+		;;
 	*) ;;
 esac
 
