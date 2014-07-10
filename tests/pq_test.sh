@@ -1,2 +1,3 @@
 #!/bin/sh
-./pq_test | cmp pq_expected.txt /dev/stdin
+set -e
+./pq_test | cmp $srcdir/pq_expected.txt /dev/stdin

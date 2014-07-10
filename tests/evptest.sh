@@ -1,2 +1,3 @@
 #!/bin/sh
-./evptest evptests.txt
+set -e
+./evptest $srcdir/evptests.txt

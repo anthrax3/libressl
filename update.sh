@@ -275,7 +275,7 @@ for i in aead/aeadtest.c aeswrap/aes_wrap.c base64/base64test.c bf/bftest.c \
 	sha256/sha256test.c sha512/sha512test.c utf8/utf8test.c; do
 	 cp $libcrypto_regress/$i tests
 done
-cp $libc_regress/arc4random-fork/arc4random-fork.c tests/arc4random_fork.c
+cp $libc_regress/arc4random-fork/arc4random-fork.c tests/arc4randomforktest.c
 cp $libc_regress/explicit_bzero/explicit_bzero.c tests
 cp $libc_regress/timingsafe/timingsafe.c tests
 
@@ -284,7 +284,7 @@ for i in ssl/ssltest.c ssl/testssl certs/ca.pem certs/server.pem; do
 done
 
 # do not directly run all test programs
-test_excludes=(aeadtest evptest pq_test ssltest)
+test_excludes=(aeadtest evptest pq_test ssltest arc4randomforktest)
 (cd tests
 	cp Makefile.am.tpl Makefile.am
 

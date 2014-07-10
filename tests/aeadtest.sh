@@ -1,2 +1,3 @@
 #!/bin/sh
-./aeadtest aeadtests.txt
+set -e
+./aeadtest $srcdir/aeadtests.txt
