@@ -43,7 +43,7 @@ tests/arc4random_fork*
 tests/explicit_bzero*
 tests/mont*
 tests/timingsafe*
-tests/*test*
+tests/*test*.c
 tests/*.pem
 tests/testssl
 tests/*.txt
@@ -99,7 +99,7 @@ apps/openssl
 crypto/compat/arc4random.c
 crypto/compat/chacha_private.h
 crypto/compat/explicit_bzero.c
-crypto/compat/getentropy_linux.c
+crypto/compat/getentropy_*.c
 crypto/compat/reallocarray.c
 crypto/compat/strlcat.c
 crypto/compat/strlcpy.c
